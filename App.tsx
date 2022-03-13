@@ -19,60 +19,15 @@ import {
 
 import theme, { Theme } from './theme'
 
+import getAllFilms from './graphql/getAllFIlms.graphql'
+import getFilm from './graphql/getFilm.graphql'
+
 const Box = createBox<Theme>()
 const Text = createText<Theme>()
 
 const client = createClient({
   url: 'http://shoopshoop.au.ngrok.io/graphql',
 })
-
-const FilmsQuery = `
-query {
-  films {
-    _id
-    title
-    year
-    image
-    directors {
-      name
-      lexKey
-      birthYear
-      deathYear
-    }
-  }
-}`
-
-const FilmQuery = `
-query film($id: ID!) {
-  film(_id: $id) {
-    _id
-    title
-    year
-    directors {
-      name
-      lexKey
-      birthYear
-      deathYear
-    }
-    originalTitle
-    image
-    plot
-    directorsText
-    writers
-    stars
-    wikipedia {
-      plotShort {
-        plainText
-        html
-      }
-      plotFull {
-        plainText
-        html
-      }
-    }
-  }
-}
-`
 
 type Film = {
   _id: number

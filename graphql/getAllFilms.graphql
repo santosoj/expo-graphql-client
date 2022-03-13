@@ -1,0 +1,14 @@
+query getAllFilms {
+  films {
+    _id
+    title
+    year
+    image
+    directors {
+      name
+      lexKey
+      birthYear
+      deathYear
+    }
+  }
+}
