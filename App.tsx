@@ -1,6 +1,6 @@
 import { Dimensions, StyleSheet, useWindowDimensions, View } from 'react-native'
 
-import { createClient, Provider, useQuery } from 'urql'
+import { createClient, Provider as GraphQLProvider, useQuery } from 'urql'
 
 import React, { Dispatch, SetStateAction, useCallback, useState } from 'react'
 
@@ -19,7 +19,10 @@ import {
 
 import theme, { Theme } from './theme'
 
-import getAllFilms from './graphql/getAllFIlms.graphql'
+import getAllDirectors from './graphql/getAllDirectors.graphql'
+import getDirector from './graphql/getDirector.graphql'
+
+import getAllFilms from './graphql/getAllFilms.graphql'
 import getFilm from './graphql/getFilm.graphql'
 
 const Box = createBox<Theme>()
@@ -68,9 +71,26 @@ function Screen({ children }: { children: React.ReactNode }): JSX.Element {
 }
 
 function FilmListScreen() {
+
+  const [{ fetching, data, error }] = useQuery({
+    query: getDirector,
+    variables: {
+      id: 23,
+    }
+  })
+
+  if (fetching) {
+    return <Text>`Loading...`</Text>
+  } else if (error) {
+    return <Text>`Oh no! Error: ${error}`</Text>
+  }
+
+  // const data = { films: {} }
+
   return (
     <Screen>
       <Text>hehehe</Text>
+      <Text>{JSON.stringify(data.director)}</Text>
     </Screen>
   )
 }
@@ -79,16 +99,16 @@ const Stack = createStackNavigator()
 
 export default function App() {
   return (
-    <ThemeProvider theme={theme}>
-      <NavigationContainer>
-        <Provider value={client}>
+    <GraphQLProvider value={client}>
+      <ThemeProvider theme={theme}>
+        <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen name='FilmList' component={FilmListScreen} />
             {/* <Stack.Screen name='Detail' component={DetailsScreen} /> */}
           </Stack.Navigator>
-        </Provider>
-      </NavigationContainer>
-    </ThemeProvider>
+        </NavigationContainer>
+      </ThemeProvider>
+    </GraphQLProvider>
   )
 }
 
