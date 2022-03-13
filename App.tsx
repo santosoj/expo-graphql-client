@@ -24,6 +24,7 @@ import getDirector from './graphql/getDirector.graphql'
 
 import getAllFilms from './graphql/getAllFilms.graphql'
 import getFilm from './graphql/getFilm.graphql'
+import SortControl from './components/SortControl'
 
 const Box = createBox<Theme>()
 const Text = createText<Theme>()
@@ -89,8 +90,9 @@ function FilmListScreen() {
 
   return (
     <Screen>
-      <Text>hehehe</Text>
-      <Text>{JSON.stringify(data.director)}</Text>
+      <SortControl />
+      {/* <Text>hehehe</Text>
+      <Text>{JSON.stringify(data.director)}</Text> */}
     </Screen>
   )
 }

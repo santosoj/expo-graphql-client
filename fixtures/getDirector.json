@@ -1,24 +1,26 @@
 {
-  "_id": "23",
-  "lexKey": "Visconti",
-  "birthYear": 1906,
-  "deathYear": 1976,
-  "thumbnail": {
-    "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Luchino_Visconti_1972b.jpg/243px-Luchino_Visconti_1972b.jpg",
-    "__typename": "Thumbnail"
-  },
-  "contentURLs": {
-    "desktop": {
-      "page": "https://en.wikipedia.org/wiki/Luchino_Visconti",
-      "__typename": "PageURLField"
+  "director": {
+    "_id": "23",
+    "lexKey": "Visconti",
+    "birthYear": 1906,
+    "deathYear": 1976,
+    "thumbnail": {
+      "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Luchino_Visconti_1972b.jpg/243px-Luchino_Visconti_1972b.jpg",
+      "__typename": "Thumbnail"
     },
-    "mobile": {
-      "page": "https://en.m.wikipedia.org/wiki/Luchino_Visconti",
-      "__typename": "PageURLField"
+    "contentURLs": {
+      "desktop": {
+        "page": "https://en.wikipedia.org/wiki/Luchino_Visconti",
+        "__typename": "PageURLField"
+      },
+      "mobile": {
+        "page": "https://en.m.wikipedia.org/wiki/Luchino_Visconti",
+        "__typename": "PageURLField"
+      },
+      "__typename": "ContentURLs"
     },
-    "__typename": "ContentURLs"
-  },
-  "extract": "Luchino Visconti di Modrone, Count of Lonate Pozzolo was an Italian filmmaker, stage director, and screenwriter. A major figure of Italian art and culture in the mid-20th century, Visconti was one of the fathers of cinematic neorealism, but later moved towards luxurious, sweeping epics dealing with themes of beauty, decadence, death and European history, especially the decay of the nobility and the bourgeoisie. He was the recipient of many accolades, including the Palme d'Or and the Golden Lion, and many of his works are regarded as highly-influential to future generations of filmmakers.",
-  "extractHTML": "<p><b>Luchino Visconti di Modrone, Count of Lonate Pozzolo</b> was an Italian filmmaker, stage director, and screenwriter. A major figure of Italian art and culture in the mid-20th century, Visconti was one of the fathers of cinematic neorealism, but later moved towards luxurious, sweeping epics dealing with themes of beauty, decadence, death and European history, especially the decay of the nobility and the bourgeoisie. He was the recipient of many accolades, including the Palme d'Or and the Golden Lion, and many of his works are regarded as highly-influential to future generations of filmmakers.</p>",
-  "__typename": "Director"
+    "extract": "Luchino Visconti di Modrone, Count of Lonate Pozzolo was an Italian filmmaker, stage director, and screenwriter. A major figure of Italian art and culture in the mid-20th century, Visconti was one of the fathers of cinematic neorealism, but later moved towards luxurious, sweeping epics dealing with themes of beauty, decadence, death and European history, especially the decay of the nobility and the bourgeoisie. He was the recipient of many accolades, including the Palme d'Or and the Golden Lion, and many of his works are regarded as highly-influential to future generations of filmmakers.",
+    "extractHTML": "<p><b>Luchino Visconti di Modrone, Count of Lonate Pozzolo</b> was an Italian filmmaker, stage director, and screenwriter. A major figure of Italian art and culture in the mid-20th century, Visconti was one of the fathers of cinematic neorealism, but later moved towards luxurious, sweeping epics dealing with themes of beauty, decadence, death and European history, especially the decay of the nobility and the bourgeoisie. He was the recipient of many accolades, including the Palme d'Or and the Golden Lion, and many of his works are regarded as highly-influential to future generations of filmmakers.</p>",
+    "__typename": "Director"
+  }
 }

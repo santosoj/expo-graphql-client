@@ -45,6 +45,7 @@
     "@storybook/testing-library": "^0.0.9",
     "@types/react": "~17.0.21",
     "@types/react-native": "~0.64.12",
+    "@urql/storybook-addon": "^1.0.8",
     "babel-loader": "^8.2.3",
     "babel-plugin-import-graphql": "^2.8.1",
     "patch-package": "^6.4.7",
