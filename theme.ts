@@ -11,44 +11,32 @@ import radii from './tokens/radii'
 import shadows from './tokens/shadows'
 import spacing from './tokens/spacing'
 
-type PxtonumReturnType<ThisType> =
-{
-  [key in keyof ThisType]: ThisType[key] extends string
-    ? ThisType[key] | number
-    : ThisType[key]
-}
+type Breakpoints = 'mobileMax' | 'tabletMin' | 'tabletMax' | 'desktopMin'
 
-declare global {
-  interface Object {
-    pxtonum: <ThisType>() => PxtonumReturnType<ThisType>
-  }
-}
-
-Object.prototype.pxtonum = function <ThisType>(): PxtonumReturnType<ThisType> {
-  const clone = Object.assign({}, this) as PxtonumReturnType<ThisType>
-  const typedThis = this as ThisType
-  for (let key in typedThis) {
-    if (this.hasOwnProperty(key)) {
-      const value = typedThis[key]
-      if (typeof value === 'string' && value.slice(-2) === 'px') {
-        // @ts-ignore
-        clone[key] = Number(value.slice(0, -2))
-      }
-    }
-  }
-  return clone
-}
+type Radii = 'hard' | 'rounded' | 'soft' | 'circle'
 
 const theme = createTheme({
   colors,
   spacing,
-  breakpoints: mediaQueries.pxtonum(),
+  breakpoints: Object.entries(mediaQueries).reduce(
+    (acc, [key, value]) => ({
+      ...acc,
+      [key]: Number(value.slice(0, -2)),
+    }),
+    {}
+  ) as { [key in Breakpoints]: number },
   fontFamilies,
   fontSizes,
   fontWeights,
   letterSpacings,
   lineHeights,
-  radii: radii.pxtonum(),
+  radii: Object.entries(radii).reduce(
+    (acc, [key, value]) => ({
+      ...acc,
+      [key]: Number(value.slice(0, -2)),
+    }),
+    {}
+  ) as { [key in Radii]: number },
   shadows,
 })
 
