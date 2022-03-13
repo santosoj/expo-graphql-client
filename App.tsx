@@ -11,6 +11,8 @@ import Carousel from 'react-native-snap-carousel'
 import { Link, NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 
+import theme, { Theme } from './theme'
+
 const client = createClient({
   url: 'http://shoopshoop.au.ngrok.io/graphql',
 })
