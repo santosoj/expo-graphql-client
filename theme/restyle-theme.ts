@@ -43,6 +43,28 @@ const theme = createTheme({
     {}
   ) as { [key in Radii]: number },
   shadows,
+  textVariants: {
+    header: {
+      fontFamily: 'Barlow',
+      fontWeight: 'bold',
+      fontSize: 34,
+      lineHeight: 42.5,
+      color: 'black',
+    },
+    subheader: {
+      fontFamily: 'Barlow',
+      fontWeight: '600',
+      fontSize: 28,
+      lineHeight: 36,
+      color: 'black',
+    },
+    body: {
+      fontFamily: 'Barlow Semi Condensed',
+      fontSize: 16,
+      lineHeight: 24,
+      color: 'black',
+    },
+  }  
 })
 
 export type Theme = typeof theme

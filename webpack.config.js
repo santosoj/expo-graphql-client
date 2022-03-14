@@ -16,5 +16,9 @@ module.exports = async function (env, argv) {
     use: 'raw-loader',
   })
 
+  config.watchOptions = {
+    ignored: [/node_modules/],
+  }
+
   return config
 }

@@ -1,11 +1,6 @@
 import { Image, View } from 'react-native'
 
-import {
-  IndexPath,
-  Select,
-  SelectItem,
-  Toggle,
-} from '@ui-kitten/components'
+import { IndexPath, Select, SelectItem, Toggle } from '@ui-kitten/components'
 import { useTheme } from '@shopify/restyle'
 import { Theme } from '../../theme/restyle-theme'
 
@@ -43,20 +38,21 @@ function SortControl({
           if (!Array.isArray(index))
             return onSelectedIndexChanged(index.row, options[index.row])
         }}
-        style={{ marginRight: spacing.small, width: 150 }}
+        style={{ marginRight: spacing.small, flex: 1 }} // , width: 150 }}
       >
         {options.map((value, index) => (
           <SelectItem key={index} title={value} />
         ))}
       </Select>
 
-      <Image style={{ width: 20, height: 20 }} source={arrowUpDown} />
+      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <Image style={{ width: 20, height: 20 }} source={arrowUpDown} />
 
-      <Toggle
-        checked={toggleStatus}
-        onChange={onToggleStatusChanged}
-        style={{ marginLeft: spacing.small }}
-      />
+        <Toggle
+          checked={toggleStatus}
+          onChange={onToggleStatusChanged}
+        />
+      </View>
     </View>
   )
 }

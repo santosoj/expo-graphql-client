@@ -6,8 +6,11 @@ import { createClient, Provider as GraphQLProvider, useQuery } from 'urql'
 
 import React, { Dispatch, SetStateAction, useCallback, useState } from 'react'
 
-import { Link, NavigationContainer } from '@react-navigation/native'
+import { Link, NavigationContainer, StackRouter } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
+import { Icon, IconRegistry, TabBar, Tab, Layout } from '@ui-kitten/components'
+import { EvaIconsPack } from '@ui-kitten/eva-icons'
 
 import {
   ThemeProvider,
@@ -33,6 +36,8 @@ import getDirector from './graphql/getDirector.graphql'
 import getAllFilms from './graphql/getAllFilms.graphql'
 import getFilm from './graphql/getFilm.graphql'
 import SortControl from './components/SortControl'
+import ResponsiveScreen from './components/ResponsiveScreen'
+import AppHeader from './components/AppHeader'
 
 const Box = createBox<Theme>()
 const Text = createText<Theme>()
@@ -43,7 +48,7 @@ const client = createClient({
 
 const loadFonts = () => {
   return Font.loadAsync({
-    'Barlow': require('./assets/font/Barlow-Regular.ttf'),
+    Barlow: require('./assets/font/Barlow-Regular.ttf'),
     'Barlow-bold': require('./assets/font/Barlow-Bold.ttf'),
     'Barlow Semi Condensed': require('./assets/font/BarlowSemiCondensed-Regular.ttf'),
     'Barlow Semi Condensed-bold': require('./assets/font/BarlowSemiCondensed-Bold.ttf'),
@@ -70,33 +75,12 @@ type Film = {
   }
 }
 
-function Screen({ children }: { children: React.ReactNode }): JSX.Element {
-  const { breakpoints } = useTheme<Theme>()
-  const { width } = useWindowDimensions()
-
-  return (
-    <Box
-      flex={1}
-      backgroundColor='white'
-      style={{
-        paddingHorizontal:
-          width >= breakpoints.desktopMin
-            ? Math.trunc((width - breakpoints.desktopMin) / 2)
-            : 0,
-      }}
-    >
-      {children}
-    </Box>
-  )
-}
-
 function FilmListScreen() {
-
   const [{ fetching, data, error }] = useQuery({
     query: getDirector,
     variables: {
       id: 23,
-    }
+    },
   })
 
   const [selectedIndex, setSelectedIndex] = useState(0)
@@ -111,7 +95,7 @@ function FilmListScreen() {
   // const data = { films: {} }
 
   return (
-    <Screen>
+    <ResponsiveScreen>
       <SortControl
         options={['Alif', 'Bat', 'Tak']}
         selectedIndex={selectedIndex}
@@ -121,41 +105,105 @@ function FilmListScreen() {
       />
       {/* <Text>hehehe</Text>
       <Text>{JSON.stringify(data.director)}</Text> */}
-    </Screen>
+    </ResponsiveScreen>
   )
 }
 
+function FilmsScreen() {
+  const [selectedIndex, setSelectedIndex] = useState(0)
+  const [toggleStatus, setToggleStatus] = useState(false)
+
+  return (
+    <Box flex={1} backgroundColor='white' style={{paddingTop: 32}}>
+      <SortControl 
+        options={['Title', 'Year']}
+        selectedIndex={selectedIndex}
+        toggleStatus={toggleStatus  }
+        onSelectedIndexChanged={setSelectedIndex}
+        onToggleStatusChanged={setToggleStatus}
+      />
+    </Box>
+  )
+}
+
+function DirectorsScreen() {
+  return <Text>DirectorsScreen</Text>
+}
+
+function AboutScreen() {
+  return <Text>AboutScreen</Text>
+}
+
 const Stack = createStackNavigator()
+const { Navigator, Screen: TabScreen } = createMaterialTopTabNavigator()
+
+const FilmIcon = (props: any) => <Icon {...props} name='film-outline' />
+const DirectorIcon = (props: any) => <Icon {...props} name='person-outline' />
+const AboutIcon = (props: any) => <Icon {...props} name='question-mark-outline' />
+
+const TopTabBar = ({ navigation, state }: any) => {
+
+  const { breakpoints } = useTheme<Theme>()
+  const { width } = useWindowDimensions()
+
+  let filmTitle, directorTitle, aboutTitle
+  if (width >=  breakpoints.desktopMin) {
+    filmTitle = 'FILMS'
+    directorTitle = 'DIRECTORS'
+    aboutTitle = 'ABOUT'
+  }
+
+  return <TabBar
+    selectedIndex={state.index}
+    onSelect={(index) => navigation.navigate(state.routeNames[index])}
+  >
+    <Tab title={filmTitle} icon={FilmIcon} />
+    <Tab title={directorTitle} icon={DirectorIcon} />
+    <Tab title={aboutTitle} icon={AboutIcon} />
+  </TabBar>
+}
+
+const TabNavigator = () => (
+  <Navigator tabBar={(props: any) => <TopTabBar {...props} />}>
+    <TabScreen name='FilmsScreen' component={FilmsScreen} />
+    <TabScreen name='DirectorsScreen' component={DirectorsScreen} />
+    <TabScreen name='AboutScreen' component={AboutScreen} />
+  </Navigator>
+)
 
 export default function App() {
-
   const [fontsLoaded, setFontsLoded] = useState(false)
 
   if (!fontsLoaded) {
-    return <AppLoading startAsync={loadFonts} onFinish={() => setFontsLoded(true)} onError={() => {}} />
+    return (
+      <AppLoading
+        startAsync={loadFonts}
+        onFinish={() => setFontsLoded(true)}
+        onError={() => {}}
+      />
+    )
   }
 
   return (
     <GraphQLProvider value={client}>
       <ThemeProvider theme={theme}>
-
-      <ApplicationProvider
-        {...eva}
-        theme={{ ...eva.light, ...kittenTheme }}
-        // @ts-ignore
-        customMapping={kittenMapping}
-      >
-
-
-        <NavigationContainer>
-          <Stack.Navigator>
+        <IconRegistry icons={EvaIconsPack} />
+        <ApplicationProvider
+          {...eva}
+          theme={{ ...eva.light, ...kittenTheme }}
+          // @ts-ignore
+          customMapping={kittenMapping}
+        >
+          <NavigationContainer>
+            {/* <Stack.Navigator>
             <Stack.Screen name='FilmList' component={FilmListScreen} />
-            {/* <Stack.Screen name='Detail' component={DetailsScreen} /> */}
-          </Stack.Navigator>
-        </NavigationContainer>
-
-      </ApplicationProvider>
-
+          </Stack.Navigator> */}
+            <ResponsiveScreen>
+              <AppHeader />
+              <TabNavigator />
+            </ResponsiveScreen>
+          </NavigationContainer>
+        </ApplicationProvider>
       </ThemeProvider>
     </GraphQLProvider>
   )
