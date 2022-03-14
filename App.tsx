@@ -1,4 +1,6 @@
 import { Dimensions, StyleSheet, useWindowDimensions, View } from 'react-native'
+import * as Font from 'expo-font'
+import AppLoading from 'expo-app-loading'
 
 import { createClient, Provider as GraphQLProvider, useQuery } from 'urql'
 
@@ -17,6 +19,12 @@ import {
   useTheme,
 } from '@shopify/restyle'
 
+import { ApplicationProvider } from '@ui-kitten/components'
+import * as eva from '@eva-design/eva'
+
+import { default as kittenTheme } from './theme/ui-kitten-theme.json'
+import { default as kittenMapping } from './theme/ui-kitten-mapping.json'
+
 import theme, { Theme } from './theme/restyle-theme'
 
 import getAllDirectors from './graphql/getAllDirectors.graphql'
@@ -32,6 +40,17 @@ const Text = createText<Theme>()
 const client = createClient({
   url: 'http://shoopshoop.au.ngrok.io/graphql',
 })
+
+const loadFonts = () => {
+  return Font.loadAsync({
+    'Barlow': require('./assets/font/Barlow-Regular.ttf'),
+    'Barlow-bold': require('./assets/font/Barlow-Bold.ttf'),
+    'Barlow Semi Condensed': require('./assets/font/BarlowSemiCondensed-Regular.ttf'),
+    'Barlow Semi Condensed-bold': require('./assets/font/BarlowSemiCondensed-Bold.ttf'),
+    'Barlow Semi Condensed-light': require('./assets/font/BarlowSemiCondensed-Light.ttf'),
+    'Barlow Semi Condensed-medium': require('./assets/font/BarlowSemiCondensed-Medium.ttf'),
+  })
+}
 
 type Film = {
   _id: number
@@ -80,6 +99,9 @@ function FilmListScreen() {
     }
   })
 
+  const [selectedIndex, setSelectedIndex] = useState(0)
+  const [toggleStatus, setToggleStatus] = useState(false)
+
   if (fetching) {
     return <Text>`Loading...`</Text>
   } else if (error) {
@@ -90,7 +112,13 @@ function FilmListScreen() {
 
   return (
     <Screen>
-      <SortControl />
+      <SortControl
+        options={['Alif', 'Bat', 'Tak']}
+        selectedIndex={selectedIndex}
+        toggleStatus={toggleStatus}
+        onSelectedIndexChanged={setSelectedIndex}
+        onToggleStatusChanged={setToggleStatus}
+      />
       {/* <Text>hehehe</Text>
       <Text>{JSON.stringify(data.director)}</Text> */}
     </Screen>
@@ -100,15 +128,34 @@ function FilmListScreen() {
 const Stack = createStackNavigator()
 
 export default function App() {
+
+  const [fontsLoaded, setFontsLoded] = useState(false)
+
+  if (!fontsLoaded) {
+    return <AppLoading startAsync={loadFonts} onFinish={() => setFontsLoded(true)} onError={() => {}} />
+  }
+
   return (
     <GraphQLProvider value={client}>
       <ThemeProvider theme={theme}>
+
+      <ApplicationProvider
+        {...eva}
+        theme={{ ...eva.light, ...kittenTheme }}
+        // @ts-ignore
+        customMapping={kittenMapping}
+      >
+
+
         <NavigationContainer>
           <Stack.Navigator>
             <Stack.Screen name='FilmList' component={FilmListScreen} />
             {/* <Stack.Screen name='Detail' component={DetailsScreen} /> */}
           </Stack.Navigator>
         </NavigationContainer>
+
+      </ApplicationProvider>
+
       </ThemeProvider>
     </GraphQLProvider>
   )

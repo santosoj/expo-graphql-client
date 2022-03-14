@@ -19,9 +19,22 @@ const Template: ComponentStory<typeof SortControl> = (args) => (
   <SortControl {...args} />
 )
 
-export const Primary = Template.bind({})
+export const ToggleFalse = Template.bind({})
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
-Primary.args = {
-  primary: true,
-  label: 'SortControl',
+ToggleFalse.args = {
+  options: ['Alif', 'Bat', 'Tak'],
+  selectedIndex: 0,
+  toggleStatus: false,
+  onSelectedIndexChanged: () => {},
+  onToggleStatusChanged: () => {},
+}
+
+export const ToggleTrue = Template.bind({})
+// More on args: https://storybook.js.org/docs/react/writing-stories/args
+ToggleTrue.args = {
+  options: ['Alif', 'Bat', 'Tak'],
+  selectedIndex: 1,
+  toggleStatus: true,
+  onSelectedIndexChanged: () => {},
+  onToggleStatusChanged: () => {},
 }

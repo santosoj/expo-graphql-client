@@ -1,5 +1,6 @@
 {
   "syncGraphics": false,
+  "outputFormatGraphics": "png",
   "templates": {
     "templatePathGraphic": "./node_modules/figmagic/templates/graphic",
     "templatePathReact": "./node_modules/figmagic/templates/react",

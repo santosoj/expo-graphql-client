@@ -1,11 +1,7 @@
-import { useState } from 'react'
-import { Image, Text, View } from 'react-native'
-import { useQuery } from 'urql'
+import { Image, View } from 'react-native'
 
 import {
-  Button,
   IndexPath,
-  Layout,
   Select,
   SelectItem,
   Toggle,
@@ -13,30 +9,54 @@ import {
 import { useTheme } from '@shopify/restyle'
 import { Theme } from '../../theme/restyle-theme'
 
-import arrowUpDown from '../../graphics/arrowupdown.svg'
+import arrowUpDown from '../../graphics/arrowupdown.png'
 
-interface SortControlProps {}
+interface SortControlProps {
+  options: string[]
+  selectedIndex: number
+  toggleStatus: boolean
+  onSelectedIndexChanged: (index: number, value: string) => void
+  onToggleStatusChanged: (status: boolean) => void
+}
 
-function SortControl({}: SortControlProps) {
-  const [selectedIndex, setSelectedIndex] = useState(new IndexPath(0))
-  const [checked, setChecked] = useState(false)
+function SortControl({
+  options,
+  selectedIndex,
+  toggleStatus,
+  onSelectedIndexChanged,
+  onToggleStatusChanged,
+}: SortControlProps) {
   const { spacing } = useTheme<Theme>()
 
   return (
-    <View style={{flexDirection: 'row'}}>
+    <View
+      style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-start',
+      }}
+    >
       <Select
-        selectedIndex={selectedIndex}
+        selectedIndex={new IndexPath(selectedIndex)}
+        value={options[selectedIndex]}
         onSelect={(index) => {
-          if (!Array.isArray(index)) return setSelectedIndex(index)
+          if (!Array.isArray(index))
+            return onSelectedIndexChanged(index.row, options[index.row])
         }}
-        style={{marginRight: spacing.small, width: 150}}
+        style={{ marginRight: spacing.small, width: 150 }}
       >
-        <SelectItem title='Option 1' />
-        <SelectItem title='Option 2' />
-        <SelectItem title='Option 3' />
+        {options.map((value, index) => (
+          <SelectItem key={index} title={value} />
+        ))}
       </Select>
-      <Image source={arrowUpDown} />
-      <Toggle checked={checked} onChange={setChecked} style={{marginLeft: spacing.small}} />
+
+      <Image style={{ width: 20, height: 20 }} source={arrowUpDown} />
+
+      <Toggle
+        checked={toggleStatus}
+        onChange={onToggleStatusChanged}
+        style={{ marginLeft: spacing.small }}
+      />
     </View>
   )
 }
