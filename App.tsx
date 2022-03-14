@@ -17,7 +17,7 @@ import {
   useTheme,
 } from '@shopify/restyle'
 
-import theme, { Theme } from './theme'
+import theme, { Theme } from './theme/restyle-theme'
 
 import getAllDirectors from './graphql/getAllDirectors.graphql'
 import getDirector from './graphql/getDirector.graphql'
@@ -113,11 +113,3 @@ export default function App() {
     </GraphQLProvider>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-})

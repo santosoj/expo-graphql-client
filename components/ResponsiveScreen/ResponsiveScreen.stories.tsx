@@ -1,27 +1,30 @@
 import React from 'react'
+import { Text, View } from 'react-native'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 
-import SortControl from '.'
+import ResponsiveScreen from '.'
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'SortControl',
-  component: SortControl,
+  title: 'ResponsiveScreen',
+  component: ResponsiveScreen,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     // backgroundColor: { control: 'color' },
   },
   parameters: {},
-} as ComponentMeta<typeof SortControl>
+} as ComponentMeta<typeof ResponsiveScreen>
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof SortControl> = (args) => (
-  <SortControl {...args} />
+const Template: ComponentStory<typeof ResponsiveScreen> = (args) => (
+  <ResponsiveScreen {...args}>
+    <View style={{backgroundColor: '#cdc'}}>
+      <Text>View on ResponsiveScreen</Text>
+    </View>
+  </ResponsiveScreen>
 )
 
 export const Primary = Template.bind({})
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 Primary.args = {
-  primary: true,
-  label: 'SortControl',
 }

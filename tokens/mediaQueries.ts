@@ -4,7 +4,8 @@ const mediaQueries = {
  "desktopMin": "900px",
  "tabletMax": "899px",
  "tabletMin": "768px",
- "mobileMax": "767px"
+ "mobileMax": "767px",
+ "zero": "1px"
 } as const;
 
 export default mediaQueries;
