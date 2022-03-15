@@ -1,4 +1,4 @@
-import { Image, View } from 'react-native'
+import { Image, useWindowDimensions, View } from 'react-native'
 
 import { IndexPath, Select, SelectItem, Toggle } from '@ui-kitten/components'
 import { useTheme } from '@shopify/restyle'
@@ -21,7 +21,9 @@ function SortControl({
   onSelectedIndexChanged,
   onToggleStatusChanged,
 }: SortControlProps) {
-  const { spacing } = useTheme<Theme>()
+  const { breakpoints, spacing } = useTheme<Theme>()
+  const { width } = useWindowDimensions()
+  const isDesktop = width >= breakpoints.desktopMin
 
   return (
     <View
@@ -38,20 +40,21 @@ function SortControl({
           if (!Array.isArray(index))
             return onSelectedIndexChanged(index.row, options[index.row])
         }}
-        style={{ marginRight: spacing.small, flex: 1 }} // , width: 150 }}
+        style={{
+          marginRight: spacing.small,
+          flex: isDesktop ? undefined : 1,
+          width: isDesktop ? 320 : undefined,
+        }}
       >
         {options.map((value, index) => (
           <SelectItem key={index} title={value} />
         ))}
       </Select>
 
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
+      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <Image style={{ width: 20, height: 20 }} source={arrowUpDown} />
 
-        <Toggle
-          checked={toggleStatus}
-          onChange={onToggleStatusChanged}
-        />
+        <Toggle checked={toggleStatus} onChange={onToggleStatusChanged} />
       </View>
     </View>
   )

@@ -11,6 +11,15 @@
     "text-subtitle-2-font-weight": "400"
   },
   "components": {
+    "Card": {
+      "appearances": {
+        "outline": {
+          "mapping": {
+            "backgroundColor": "color-basic-200"
+          }
+        }
+      }
+    },
     "Toggle": {
       "appearances": {
         "default": {
