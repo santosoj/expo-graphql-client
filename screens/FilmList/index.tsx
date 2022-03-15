@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { FlatList, StyleSheet, Text } from 'react-native'
 import { createBox } from '@shopify/restyle'
 
@@ -12,33 +12,9 @@ import SortControl from '../../components/SortControl'
 import { Theme } from '../../theme/restyle-theme'
 
 import SampleImage from '../../components/Card/sampleImage.jpg'
+import { useEffect } from 'react'
 
 const Box = createBox<Theme>()
-
-// const style = StyleSheet.create({
-//   flatListContentContainer: {
-//     /* width */
-//     // @ts-ignore
-//     ['::-webkit-scrollbar']: {
-//       width: 4,
-//     },
-
-//     /* Track */
-//     ['::-webkit-scrollbar-track']: {
-//       background: 'red',
-//     },
-
-//     /* Handle */
-//     ['::-webkit-scrollbar-thumb']: {
-//       background: 'green',
-//     },
-
-//     /* Handle on hover */
-//     ['::-webkit-scrollbar-thumb:hover']: {
-//       background: 'blue',
-//     },
-//   },
-// })
 
 function FilmList() {
   const [selectedIndex, setSelectedIndex] = useState(0)
@@ -82,7 +58,6 @@ function FilmList() {
           style={[
             { minHeight: 'min-content', paddingBottom: 150 },
           ]}
-          showsVerticalScrollIndicator={false}
         />
       </Box>
     </Box>
