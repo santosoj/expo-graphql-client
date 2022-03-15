@@ -35,9 +35,12 @@ import getDirector from './graphql/getDirector.graphql'
 
 import getAllFilms from './graphql/getAllFilms.graphql'
 import getFilm from './graphql/getFilm.graphql'
+
 import SortControl from './components/SortControl'
 import ResponsiveScreen from './components/ResponsiveScreen'
 import AppHeader from './components/AppHeader'
+
+import FilmList from './screens/FilmList'
 
 const Box = createBox<Theme>()
 const Text = createText<Theme>()
@@ -109,23 +112,6 @@ function FilmListScreen() {
   )
 }
 
-function FilmsScreen() {
-  const [selectedIndex, setSelectedIndex] = useState(0)
-  const [toggleStatus, setToggleStatus] = useState(false)
-
-  return (
-    <Box flex={1} backgroundColor='white' style={{paddingTop: 32}}>
-      <SortControl 
-        options={['Title', 'Year']}
-        selectedIndex={selectedIndex}
-        toggleStatus={toggleStatus  }
-        onSelectedIndexChanged={setSelectedIndex}
-        onToggleStatusChanged={setToggleStatus}
-      />
-    </Box>
-  )
-}
-
 function DirectorsScreen() {
   return <Text>DirectorsScreen</Text>
 }
@@ -165,7 +151,7 @@ const TopTabBar = ({ navigation, state }: any) => {
 
 const TabNavigator = () => (
   <Navigator tabBar={(props: any) => <TopTabBar {...props} />}>
-    <TabScreen name='FilmsScreen' component={FilmsScreen} />
+    <TabScreen name='FilmsScreen' component={FilmList} />
     <TabScreen name='DirectorsScreen' component={DirectorsScreen} />
     <TabScreen name='AboutScreen' component={AboutScreen} />
   </Navigator>

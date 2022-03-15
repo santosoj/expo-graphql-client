@@ -3,7 +3,10 @@ query getAllFilms ($order: [Sort!], $fields: [String!]) {
     _id
     title
     year
+    directorsText
+    image
     directors {
+      _id
       name
       lexKey
       birthYear

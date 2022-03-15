@@ -10,7 +10,7 @@ function ResponsiveScreen({
 }): JSX.Element | null {
   const Box = createBox<Theme>()
   const { breakpoints } = useTheme<Theme>()
-  const { width } = useWindowDimensions()
+  const { width, height } = useWindowDimensions()
 
   return (
     <Box
@@ -21,6 +21,8 @@ function ResponsiveScreen({
           width >= breakpoints.desktopMin
             ? Math.trunc((width - breakpoints.desktopMin) / 2)
             : 0,
+        minHeight: height,
+        maxHeight: height
       }}
     >
       {children}

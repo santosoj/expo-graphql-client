@@ -1,4 +1,4 @@
-import { Image, ImageSourcePropType, View } from 'react-native'
+import { Image, ImageRequireSource, ImageSourcePropType, View } from 'react-native'
 import { createText } from '@shopify/restyle'
 import { Card as UIKittenCard } from '@ui-kitten/components'
 
