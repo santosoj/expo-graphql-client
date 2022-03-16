@@ -1,5 +1,6 @@
 import { useCallback, useRef, useState } from 'react'
 import { FlatList, StyleSheet, Text } from 'react-native'
+import { Link } from '@react-navigation/native'
 import { createBox } from '@shopify/restyle'
 
 import { useQuery } from 'urql'
@@ -34,6 +35,7 @@ function FilmList() {
         line2={item.year}
         line3={item.directorsText}
         imageSource={{ uri: item.image }}
+        linkTo={{ screen: 'Film', params: { id: item._id } }}
       />
     )
   }, [])

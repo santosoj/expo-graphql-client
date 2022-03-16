@@ -1,9 +1,11 @@
 query getFilm($id: ID!) {
   film(_id: $id) {
     _id
+    imdbID
     title
     year
     directors {
+      _id
       name
       lexKey
       birthYear
@@ -16,6 +18,7 @@ query getFilm($id: ID!) {
     writers
     stars
     wikipedia {
+      url
       plotShort {
         plainText
         html

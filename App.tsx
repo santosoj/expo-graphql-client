@@ -6,7 +6,13 @@ import { createClient, Provider as GraphQLProvider, useQuery } from 'urql'
 
 import React, { Dispatch, SetStateAction, useCallback, useState } from 'react'
 
-import { Link, NavigationContainer, StackRouter } from '@react-navigation/native'
+import { HeaderTitleProps } from '@react-navigation/elements'
+
+import {
+  Link,
+  NavigationContainer,
+  StackRouter,
+} from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { Icon, IconRegistry, TabBar, Tab, Layout } from '@ui-kitten/components'
@@ -40,6 +46,7 @@ import SortControl from './components/SortControl'
 import ResponsiveScreen from './components/ResponsiveScreen'
 import AppHeader from './components/AppHeader'
 
+import FilmDetail from './screens/FilmDetail'
 import FilmList from './screens/FilmList'
 
 const Box = createBox<Theme>()
@@ -78,40 +85,6 @@ type Film = {
   }
 }
 
-function FilmListScreen() {
-  const [{ fetching, data, error }] = useQuery({
-    query: getDirector,
-    variables: {
-      id: 23,
-    },
-  })
-
-  const [selectedIndex, setSelectedIndex] = useState(0)
-  const [toggleStatus, setToggleStatus] = useState(false)
-
-  if (fetching) {
-    return <Text>`Loading...`</Text>
-  } else if (error) {
-    return <Text>`Oh no! Error: ${error}`</Text>
-  }
-
-  // const data = { films: {} }
-
-  return (
-    <ResponsiveScreen>
-      <SortControl
-        options={['Alif', 'Bat', 'Tak']}
-        selectedIndex={selectedIndex}
-        toggleStatus={toggleStatus}
-        onSelectedIndexChanged={setSelectedIndex}
-        onToggleStatusChanged={setToggleStatus}
-      />
-      {/* <Text>hehehe</Text>
-      <Text>{JSON.stringify(data.director)}</Text> */}
-    </ResponsiveScreen>
-  )
-}
-
 function DirectorsScreen() {
   return <Text>DirectorsScreen</Text>
 }
@@ -120,38 +93,66 @@ function AboutScreen() {
   return <Text>AboutScreen</Text>
 }
 
+function FilmStack() {
+  const { colors } = useTheme<Theme>()
+
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerStyle: { backgroundColor: colors.white },
+        headerTintColor: colors.black,
+        headerTitleStyle: { fontFamily: 'Barlow' },
+      }}
+    >
+      <Stack.Screen
+        name='Films'
+        component={FilmList}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name='Film'
+        component={FilmDetail}
+        options={{ title: '' }}
+      />
+    </Stack.Navigator>
+  )
+}
+
 const Stack = createStackNavigator()
 const { Navigator, Screen: TabScreen } = createMaterialTopTabNavigator()
 
 const FilmIcon = (props: any) => <Icon {...props} name='film-outline' />
 const DirectorIcon = (props: any) => <Icon {...props} name='person-outline' />
-const AboutIcon = (props: any) => <Icon {...props} name='question-mark-outline' />
+const AboutIcon = (props: any) => (
+  <Icon {...props} name='question-mark-outline' />
+)
 
 const TopTabBar = ({ navigation, state }: any) => {
-
   const { breakpoints } = useTheme<Theme>()
   const { width } = useWindowDimensions()
 
   let filmTitle, directorTitle, aboutTitle
-  if (width >=  breakpoints.desktopMin) {
+  if (width >= breakpoints.desktopMin) {
     filmTitle = 'FILMS'
     directorTitle = 'DIRECTORS'
     aboutTitle = 'ABOUT'
   }
 
-  return <TabBar
-    selectedIndex={state.index}
-    onSelect={(index) => navigation.navigate(state.routeNames[index])}
-  >
-    <Tab title={filmTitle} icon={FilmIcon} />
-    <Tab title={directorTitle} icon={DirectorIcon} />
-    <Tab title={aboutTitle} icon={AboutIcon} />
-  </TabBar>
+  return (
+    <TabBar
+      selectedIndex={state.index}
+      onSelect={(index) => navigation.navigate(state.routeNames[index])}
+    >
+      <Tab title={filmTitle} icon={FilmIcon} />
+      <Tab title={directorTitle} icon={DirectorIcon} />
+      <Tab title={aboutTitle} icon={AboutIcon} />
+    </TabBar>
+  )
 }
 
 const TabNavigator = () => (
   <Navigator tabBar={(props: any) => <TopTabBar {...props} />}>
-    <TabScreen name='FilmsScreen' component={FilmList} />
+    <TabScreen name='FilmsScreen' component={FilmStack} />
     <TabScreen name='DirectorsScreen' component={DirectorsScreen} />
     <TabScreen name='AboutScreen' component={AboutScreen} />
   </Navigator>
