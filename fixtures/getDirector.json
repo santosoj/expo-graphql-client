@@ -1,29 +1,31 @@
 {
   "director": {
-    "_id": "35",
-    "lexKey": "Minnelli",
-    "birthYear": 1903,
-    "deathYear": 1986,
+    "_id": "14",
+    "lexKey": "Bertolucci",
+    "name": "Bernardo Bertolucci",
+    "birthYear": 1941,
+    "deathYear": 2018,
     "thumbnail": {
-      "source": "https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/Vincent_Minelli_-_1950s.jpg/245px-Vincent_Minelli_-_1950s.jpg",
+      "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Bernardo_Bertolucci%2C_film_director.jpg/214px-Bernardo_Bertolucci%2C_film_director.jpg",
       "__typename": "Thumbnail"
     },
     "contentURLs": {
       "desktop": {
-        "page": "https://en.wikipedia.org/wiki/Vincente_Minnelli",
+        "page": "https://en.wikipedia.org/wiki/Bernardo_Bertolucci",
         "__typename": "PageURLField"
       },
       "mobile": {
-        "page": "https://en.m.wikipedia.org/wiki/Vincente_Minnelli",
+        "page": "https://en.m.wikipedia.org/wiki/Bernardo_Bertolucci",
         "__typename": "PageURLField"
       },
       "__typename": "ContentURLs"
     },
-    "extract": "Vincente Minnelli was an American stage director and film director. He directed the classic movie musicals Meet Me in St. Louis (1944), An American in Paris (1951), The Band Wagon (1953), and Gigi (1958). An American in Paris and Gigi both won the Academy Award for Best Picture, with Minnelli winning Best Director for Gigi. In addition to having directed some of the best known musicals of his day, Minnelli made many comedies and melodramas. He was married to Judy Garland from 1945 until 1951; the couple were the parents of Liza Minnelli.",
-    "extractHTML": "<p><b>Vincente Minnelli</b> was an American stage director and film director. He directed the classic movie musicals <i>Meet Me in St. Louis</i> (1944), <i>An American in Paris</i> (1951), <i>The Band Wagon</i> (1953), and <i>Gigi</i> (1958). <i>An American in Paris</i> and <i>Gigi</i> both won the Academy Award for Best Picture, with Minnelli winning Best Director for <i>Gigi</i>. In addition to having directed some of the best known musicals of his day, Minnelli made many comedies and melodramas. He was married to Judy Garland from 1945 until 1951; the couple were the parents of Liza Minnelli.</p>",
+    "extract": "Bernardo Bertolucci OMRI was an Italian film director and screenwriter with a career that spanned 50 years. Considered one of the great filmmakers of the Italian cinema, Bertolucci's work achieved widespread international acclaim. He was the first Italian filmmaker to win the Academy Award for Best Director for The Last Emperor (1987), one of many accolades including two Golden Globes, two David di Donatellos, a British Academy Award, and a César Award. In recognition of his work, he was presented with the inaugural Honorary Palme d'Or Award at the opening ceremony of the 2011 Cannes Film Festival. He had previously received a Lifetime Achievement Golden Lion from the Venice Film Festival.",
+    "extractHTML": "<p><b>Bernardo Bertolucci</b> <span style=\"font-size:85%\">OMRI</span> was an Italian film director and screenwriter with a career that spanned 50 years. Considered one of the great filmmakers of the Italian cinema, Bertolucci's work achieved widespread international acclaim. He was the first Italian filmmaker to win the Academy Award for Best Director for <i>The Last Emperor</i> (1987), one of many accolades including two Golden Globes, two David di Donatellos, a British Academy Award, and a César Award. In recognition of his work, he was presented with the inaugural Honorary Palme d'Or Award at the opening ceremony of the 2011 Cannes Film Festival. He had previously received a Lifetime Achievement Golden Lion from the Venice Film Festival.</p>",
     "film": {
-      "_id": "34",
-      "title": "An American in Paris",
+      "_id": "14",
+      "title": "The Conformist",
+      "image": "https://imdb-api.com/images/original/MV5BNDRhYjQ0NTUtNzJmYy00ZWUyLTk3NjQtZjE1MzM4ZDZiYTFlXkEyXkFqcGdeQXVyMjUzOTY1NTc@._V1_Ratio0.6762_AL_.jpg",
       "__typename": "FilmStub"
     },
     "__typename": "Director"

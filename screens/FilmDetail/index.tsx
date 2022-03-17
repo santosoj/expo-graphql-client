@@ -14,6 +14,7 @@ import { StackScreenProps } from '@react-navigation/stack'
 import ExternalLinkIcon from '../../graphics/external-link.png'
 import IMDBIcon from '../../graphics/imdb.png'
 import WikipediaIcon from '../../graphics/wikipedia.png'
+import { useEffect } from 'react'
 
 const Box = createBox<Theme>()
 const Text = createText<Theme>()
@@ -38,9 +39,11 @@ function FilmDetail({
 
   const film = data?.film
 
-  if (film) {
-    navigation.setOptions({ title: film.title })
-  }
+  useEffect(() => {
+    if (film) {
+      navigation.setOptions({ title: film.title })
+    }
+  }, [film])
 
   return (
     <Box

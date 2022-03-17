@@ -1,20 +1,18 @@
 import React from 'react'
 import { ComponentStory, ComponentMeta } from '@storybook/react'
 
-import { urqlMock } from '../../graphql/util'
-
-import FilmDetail from '.'
+import DirectorDetail from '.'
 
 export default {
-  title: 'Screens/FilmDetail',
-  component: FilmDetail,
+  title: 'Screens/DirectorDetail',
+  component: DirectorDetail,
   argTypes: {
   },
   parameters: {},
-} as ComponentMeta<typeof FilmDetail>
+} as ComponentMeta<typeof DirectorDetail>
 
-const Template: ComponentStory<typeof FilmDetail> = (args) => (
-  <FilmDetail {...args} />
+const Template: ComponentStory<typeof DirectorDetail> = (args) => (
+  <DirectorDetail {...args} />
 )
 
 export const Default = Template.bind({})
@@ -24,7 +22,7 @@ Default.args = {
       id: 23
     },
     key: 'hehehe',
-    name: 'Film'
+    name: 'Director'
   },
   // @ts-ignore
   navigation: {

@@ -30,6 +30,5 @@ export function getQueryName(op: Operation): QueryName | undefined {
 export function urqlMock(op: Operation): unknown {
   const queryName = getQueryName(op)
   const data = queryName ? mockDataForQuery[queryName] : {}
-
   return { data }
 }

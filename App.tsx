@@ -49,6 +49,7 @@ import AppHeader from './components/AppHeader'
 import FilmDetail from './screens/FilmDetail'
 import FilmList from './screens/FilmList'
 import DirectorList from './screens/DirectorList'
+import DirectorDetail from './screens/DirectorDetail'
 
 const Box = createBox<Theme>()
 const Text = createText<Theme>()
@@ -90,7 +91,7 @@ function AboutScreen() {
   return <Text>AboutScreen</Text>
 }
 
-const stackScreenOptions = ({colors}: Theme) => ({
+const stackScreenOptions = ({ colors }: Theme) => ({
   headerStyle: { backgroundColor: colors.white },
   headerTintColor: colors.black,
   headerTitleStyle: { fontFamily: 'Barlow' },
@@ -100,17 +101,13 @@ function FilmStack() {
   const _theme = useTheme<Theme>()
 
   return (
-    <Stack.Navigator
-      screenOptions={stackScreenOptions(_theme)}
-    >
+    <Stack.Navigator screenOptions={stackScreenOptions(_theme)}>
       <Stack.Screen
-        key='films'
         name='Films'
         component={FilmList}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        key='film'
         name='Film'
         component={FilmDetail}
         options={{ title: '' }}
@@ -123,20 +120,17 @@ function DirectorStack() {
   const _theme = useTheme<Theme>()
 
   return (
-    <Stack.Navigator
-      screenOptions={stackScreenOptions(_theme)}
-    >
+    <Stack.Navigator screenOptions={stackScreenOptions(_theme)}>
       <Stack.Screen
-        key='directors'
         name='Directors'
         component={DirectorList}
         options={{ headerShown: false }}
       />
-      {/* <Stack.Screen
-        name='Film'
+      <Stack.Screen
+        name='Director'
         component={DirectorDetail}
         options={{ title: '' }}
-      /> */}
+      />
     </Stack.Navigator>
   )
 }
