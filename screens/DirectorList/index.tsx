@@ -12,6 +12,7 @@ import SortControl, {
   DisplayNameSortOption,
   SortDirection,
   sortOptionDisplayName,
+  toggleSortDirections
 } from '../../components/SortControl'
 
 import { Theme } from '../../theme/restyle-theme'
@@ -21,16 +22,6 @@ import PersonPlaceholder from '../../graphics/personPlaceholder.png'
 const MAXINT32 = 0x7fffffff
 
 const Box = createBox<Theme>()
-
-function toggleSortDirections(
-  sortDirections: SortDirection[],
-  toggleStatus: boolean
-) {
-  if (toggleStatus) {
-    return sortDirections.map((d) => (d === 'asc' ? 'desc' : 'asc'))
-  }
-  return sortDirections
-}
 
 function DirectorList() {
   const sortOptions: DisplayNameSortOption[] = [

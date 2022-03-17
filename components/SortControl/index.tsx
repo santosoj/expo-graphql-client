@@ -28,6 +28,16 @@ export function sortOptionDisplayName(opt: SortOption): string {
   }
 }
 
+export function toggleSortDirections(
+  sortDirections: SortDirection[],
+  toggleStatus: boolean
+) {
+  if (toggleStatus) {
+    return sortDirections.map((d) => (d === 'asc' ? 'desc' : 'asc'))
+  }
+  return sortDirections
+}
+
 interface SortControlProps {
   options: SortOption[]
   selectedIndex: number
