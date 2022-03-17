@@ -10,8 +10,6 @@ import allDirectors from '../../graphql/getAllDirectors.graphql'
 import Card from '../../components/Card'
 import SortControl, {
   DisplayNameSortOption,
-  SortDirection,
-  sortOptionDisplayName,
   toggleSortDirections
 } from '../../components/SortControl'
 
@@ -77,7 +75,7 @@ function DirectorList() {
   return (
     <Box flex={1} backgroundColor='white' style={{ paddingTop: 32 }}>
       <SortControl
-        options={sortOptions.map(sortOptionDisplayName)}
+        options={sortOptions}
         selectedIndex={selectedIndex}
         toggleStatus={toggleStatus}
         onSelectedIndexChanged={setSelectedIndex}
