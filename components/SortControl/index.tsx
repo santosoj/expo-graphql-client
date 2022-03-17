@@ -6,8 +6,31 @@ import { Theme } from '../../theme/restyle-theme'
 
 import arrowUpDown from '../../graphics/arrowupdown.png'
 
+export type DisplayNameSortOption = {
+  displayName: string,
+  key: string
+}
+
+export type SortOption = string | DisplayNameSortOption
+
+export function sortOptionDisplayName(opt: SortOption): string {
+  if (typeof opt === 'string') {
+    return opt
+  } else {
+    return opt.displayName
+  }
+}
+
+export function sortOptionKey(opt: SortOption): string {
+  if (typeof opt === 'string') {
+    return opt
+  } else {
+    return opt.key
+  }
+}
+
 interface SortControlProps {
-  options: string[]
+  options: SortOption[]
   selectedIndex: number
   toggleStatus: boolean
   onSelectedIndexChanged: (index: number, value: string) => void
@@ -35,10 +58,10 @@ function SortControl({
     >
       <Select
         selectedIndex={new IndexPath(selectedIndex)}
-        value={options[selectedIndex]}
+        value={sortOptionDisplayName(options[selectedIndex])}
         onSelect={(index) => {
           if (!Array.isArray(index))
-            return onSelectedIndexChanged(index.row, options[index.row])
+            return onSelectedIndexChanged(index.row, sortOptionKey(options[index.row]))
         }}
         style={{
           marginRight: spacing.small,

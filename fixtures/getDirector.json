@@ -1,26 +1,31 @@
 {
   "director": {
-    "_id": "23",
-    "lexKey": "Visconti",
-    "birthYear": 1906,
-    "deathYear": 1976,
+    "_id": "35",
+    "lexKey": "Minnelli",
+    "birthYear": 1903,
+    "deathYear": 1986,
     "thumbnail": {
-      "source": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c1/Luchino_Visconti_1972b.jpg/243px-Luchino_Visconti_1972b.jpg",
+      "source": "https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/Vincent_Minelli_-_1950s.jpg/245px-Vincent_Minelli_-_1950s.jpg",
       "__typename": "Thumbnail"
     },
     "contentURLs": {
       "desktop": {
-        "page": "https://en.wikipedia.org/wiki/Luchino_Visconti",
+        "page": "https://en.wikipedia.org/wiki/Vincente_Minnelli",
         "__typename": "PageURLField"
       },
       "mobile": {
-        "page": "https://en.m.wikipedia.org/wiki/Luchino_Visconti",
+        "page": "https://en.m.wikipedia.org/wiki/Vincente_Minnelli",
         "__typename": "PageURLField"
       },
       "__typename": "ContentURLs"
     },
-    "extract": "Luchino Visconti di Modrone, Count of Lonate Pozzolo was an Italian filmmaker, stage director, and screenwriter. A major figure of Italian art and culture in the mid-20th century, Visconti was one of the fathers of cinematic neorealism, but later moved towards luxurious, sweeping epics dealing with themes of beauty, decadence, death and European history, especially the decay of the nobility and the bourgeoisie. He was the recipient of many accolades, including the Palme d'Or and the Golden Lion, and many of his works are regarded as highly-influential to future generations of filmmakers.",
-    "extractHTML": "<p><b>Luchino Visconti di Modrone, Count of Lonate Pozzolo</b> was an Italian filmmaker, stage director, and screenwriter. A major figure of Italian art and culture in the mid-20th century, Visconti was one of the fathers of cinematic neorealism, but later moved towards luxurious, sweeping epics dealing with themes of beauty, decadence, death and European history, especially the decay of the nobility and the bourgeoisie. He was the recipient of many accolades, including the Palme d'Or and the Golden Lion, and many of his works are regarded as highly-influential to future generations of filmmakers.</p>",
+    "extract": "Vincente Minnelli was an American stage director and film director. He directed the classic movie musicals Meet Me in St. Louis (1944), An American in Paris (1951), The Band Wagon (1953), and Gigi (1958). An American in Paris and Gigi both won the Academy Award for Best Picture, with Minnelli winning Best Director for Gigi. In addition to having directed some of the best known musicals of his day, Minnelli made many comedies and melodramas. He was married to Judy Garland from 1945 until 1951; the couple were the parents of Liza Minnelli.",
+    "extractHTML": "<p><b>Vincente Minnelli</b> was an American stage director and film director. He directed the classic movie musicals <i>Meet Me in St. Louis</i> (1944), <i>An American in Paris</i> (1951), <i>The Band Wagon</i> (1953), and <i>Gigi</i> (1958). <i>An American in Paris</i> and <i>Gigi</i> both won the Academy Award for Best Picture, with Minnelli winning Best Director for <i>Gigi</i>. In addition to having directed some of the best known musicals of his day, Minnelli made many comedies and melodramas. He was married to Judy Garland from 1945 until 1951; the couple were the parents of Liza Minnelli.</p>",
+    "film": {
+      "_id": "34",
+      "title": "An American in Paris",
+      "__typename": "FilmStub"
+    },
     "__typename": "Director"
   }
 }

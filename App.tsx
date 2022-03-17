@@ -48,6 +48,7 @@ import AppHeader from './components/AppHeader'
 
 import FilmDetail from './screens/FilmDetail'
 import FilmList from './screens/FilmList'
+import DirectorList from './screens/DirectorList'
 
 const Box = createBox<Theme>()
 const Text = createText<Theme>()
@@ -85,35 +86,57 @@ type Film = {
   }
 }
 
-function DirectorsScreen() {
-  return <Text>DirectorsScreen</Text>
-}
-
 function AboutScreen() {
   return <Text>AboutScreen</Text>
 }
 
+const stackScreenOptions = ({colors}: Theme) => ({
+  headerStyle: { backgroundColor: colors.white },
+  headerTintColor: colors.black,
+  headerTitleStyle: { fontFamily: 'Barlow' },
+})
+
 function FilmStack() {
-  const { colors } = useTheme<Theme>()
+  const _theme = useTheme<Theme>()
 
   return (
     <Stack.Navigator
-      screenOptions={{
-        headerStyle: { backgroundColor: colors.white },
-        headerTintColor: colors.black,
-        headerTitleStyle: { fontFamily: 'Barlow' },
-      }}
+      screenOptions={stackScreenOptions(_theme)}
     >
       <Stack.Screen
+        key='films'
         name='Films'
         component={FilmList}
         options={{ headerShown: false }}
       />
       <Stack.Screen
+        key='film'
         name='Film'
         component={FilmDetail}
         options={{ title: '' }}
       />
+    </Stack.Navigator>
+  )
+}
+
+function DirectorStack() {
+  const _theme = useTheme<Theme>()
+
+  return (
+    <Stack.Navigator
+      screenOptions={stackScreenOptions(_theme)}
+    >
+      <Stack.Screen
+        key='directors'
+        name='Directors'
+        component={DirectorList}
+        options={{ headerShown: false }}
+      />
+      {/* <Stack.Screen
+        name='Film'
+        component={DirectorDetail}
+        options={{ title: '' }}
+      /> */}
     </Stack.Navigator>
   )
 }
@@ -153,7 +176,7 @@ const TopTabBar = ({ navigation, state }: any) => {
 const TabNavigator = () => (
   <Navigator tabBar={(props: any) => <TopTabBar {...props} />}>
     <TabScreen name='FilmsScreen' component={FilmStack} />
-    <TabScreen name='DirectorsScreen' component={DirectorsScreen} />
+    <TabScreen name='DirectorsScreen' component={DirectorStack} />
     <TabScreen name='AboutScreen' component={AboutScreen} />
   </Navigator>
 )

@@ -5,5 +5,12 @@ query getAllDirectors ($order: [Sort!], $fields: [String!]) {
     lexKey
     birthYear
     deathYear
+    film {
+      _id
+      title
+    }
+    thumbnail {
+      source
+    }
   }
 }

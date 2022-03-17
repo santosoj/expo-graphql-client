@@ -5,27 +5,37 @@ import { createBox } from '@shopify/restyle'
 
 import { useQuery } from 'urql'
 
-// import allDirectors from '../../graphql/getAllDirectors.graphql'
-import getDirector from '../../graphql/getDirector.graphql'
-import allFilms from '../../graphql/getAllFilms.graphql'
+import allDirectors from '../../graphql/getAllDirectors.graphql'
 
 import Card from '../../components/Card'
-import SortControl from '../../components/SortControl'
+import SortControl, {
+  DisplayNameSortOption,
+  sortOptionDisplayName,
+  sortOptionKey,
+} from '../../components/SortControl'
 
 import { Theme } from '../../theme/restyle-theme'
 
+import PersonPlaceholder from '../../graphics/personPlaceholder.png'
+
+const MAXINT32 = 0x7fffffff
+
 const Box = createBox<Theme>()
 
-function FilmList() {
-  const sortOptions = ['Title', 'Year']
+function DirectorList() {
+  const sortOptions: DisplayNameSortOption[] = [
+    { displayName: 'Name', key: 'lexKey' },
+    { displayName: 'Year of birth', key: 'birthYear' },
+    { displayName: 'Year of death', key: 'deathYear' },
+  ]
 
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [toggleStatus, setToggleStatus] = useState(false)
 
   const [{ fetching, data, error }] = useQuery({
-    query: allFilms,
+    query: allDirectors,
     variables: {
-      fields: [sortOptions[selectedIndex].toLowerCase()],
+      fields: [sortOptions[selectedIndex].key],
       order: [toggleStatus ? 'desc' : 'asc'],
     },
   })
@@ -33,11 +43,17 @@ function FilmList() {
   const renderItem = useCallback(({ item }: { item: any }) => {
     return (
       <Card
-        line1={item.title}
-        line2={item.year}
-        line3={item.directorsText}
-        imageSource={{ uri: item.image }}
-        linkTo={{ screen: 'Film', params: { id: item._id } }}
+        line1={item.name}
+        line2={`${item.birthYear}${
+          item.deathYear !== MAXINT32
+            ? `\u2000\u2014\u2000${item.deathYear}`
+            : ''
+        }`}
+        line3={item.film.title}
+        imageSource={
+          !!item.thumbnail ? { uri: item.thumbnail.source } : PersonPlaceholder
+        }
+        linkTo={{ screen: 'Director', params: { id: item._id } }}
       />
     )
   }, [])
@@ -45,16 +61,16 @@ function FilmList() {
   return (
     <Box flex={1} backgroundColor='white' style={{ paddingTop: 32 }}>
       <SortControl
-        options={sortOptions}
+        options={sortOptions.map(sortOptionDisplayName)}
         selectedIndex={selectedIndex}
         toggleStatus={toggleStatus}
         onSelectedIndexChanged={setSelectedIndex}
         onToggleStatusChanged={setToggleStatus}
       />
       <Box style={{ paddingTop: 32, flex: 1 }}>
-        {!!data?.films && (
+        {!!data?.directors && (
           <FlatList
-            data={data.films}
+            data={data.directors}
             renderItem={renderItem}
             style={[{ minHeight: 'min-content', paddingBottom: 150 }]}
           />
@@ -64,4 +80,4 @@ function FilmList() {
   )
 }
 
-export default FilmList
+export default DirectorList
