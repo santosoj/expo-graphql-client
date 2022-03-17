@@ -15,6 +15,7 @@ import ExternalLinkIcon from '../../graphics/external-link.png'
 import PersonPlaceholder from '../../graphics/personPlaceholder.png'
 import WikipediaIcon from '../../graphics/wikipedia.png'
 import { useEffect } from 'react'
+import KnownFor from '../../components/KnownFor'
 
 const Box = createBox<Theme>()
 const Text = createText<Theme>()
@@ -61,7 +62,7 @@ function DirectorDetail({
             style={{ height: 240 }}
             resizeMode='cover'
           />
-          <Box flexDirection='row' paddingTop='medium'>
+          <Box flexDirection='row' paddingTop='large' paddingBottom='medium'>
             <Box>
               <Image
                 source={
@@ -73,9 +74,7 @@ function DirectorDetail({
               />
             </Box>
             <Box>
-              <Text variant='subheader'>
-                {director.name}
-              </Text>
+              <Text variant='subheader'>{director.name}</Text>
               <Box flexDirection='row' alignItems='center'>
                 <>
                   <Text variant='body'>{`${director.birthYear}${
@@ -88,8 +87,13 @@ function DirectorDetail({
             </Box>
           </Box>
           <Box>
-            {/* KnownFor */}
-            <Text variant='body' paddingTop='medium' paddingRight='small'>
+            <Box paddingRight='tiny'>
+              <KnownFor
+                title={director.film.title}
+                linkTo={{ screen: 'Film', params: { id: director.film._id } }}
+              />
+            </Box>
+            <Text variant='body' paddingTop='small' paddingRight='small'>
               {director.extract}
             </Text>
             <Box flexDirection='row' paddingTop='medium'>
