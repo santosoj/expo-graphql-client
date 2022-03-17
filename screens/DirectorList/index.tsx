@@ -10,8 +10,8 @@ import allDirectors from '../../graphql/getAllDirectors.graphql'
 import Card from '../../components/Card'
 import SortControl, {
   DisplayNameSortOption,
+  SortDirection,
   sortOptionDisplayName,
-  sortOptionKey,
 } from '../../components/SortControl'
 
 import { Theme } from '../../theme/restyle-theme'
@@ -22,21 +22,46 @@ const MAXINT32 = 0x7fffffff
 
 const Box = createBox<Theme>()
 
+function toggleSortDirections(
+  sortDirections: SortDirection[],
+  toggleStatus: boolean
+) {
+  if (toggleStatus) {
+    return sortDirections.map((d) => (d === 'asc' ? 'desc' : 'asc'))
+  }
+  return sortDirections
+}
+
 function DirectorList() {
   const sortOptions: DisplayNameSortOption[] = [
-    { displayName: 'Name', key: 'lexKey' },
-    { displayName: 'Year of birth', key: 'birthYear' },
-    { displayName: 'Year of death', key: 'deathYear' },
+    {
+      displayName: 'Name',
+      args: { sortDirections: ['asc'], keys: ['lexKey'] },
+    },
+    {
+      displayName: 'Year of birth',
+      args: { sortDirections: ['asc', 'asc'], keys: ['birthYear', 'lexKey'] },
+    },
+    {
+      displayName: 'Year of death',
+      args: {
+        sortDirections: ['asc', 'asc', 'asc'],
+        keys: ['deathYear', 'birthYear', 'lexKey'],
+      },
+    },
   ]
 
-  const [selectedIndex, setSelectedIndex] = useState(0)
+  const [selectedIndex, setSelectedIndex] = useState(2)
   const [toggleStatus, setToggleStatus] = useState(false)
 
   const [{ fetching, data, error }] = useQuery({
     query: allDirectors,
     variables: {
-      fields: [sortOptions[selectedIndex].key],
-      order: [toggleStatus ? 'desc' : 'asc'],
+      fields: sortOptions[selectedIndex].args.keys,
+      order: toggleSortDirections(
+        sortOptions[selectedIndex].args.sortDirections,
+        toggleStatus
+      ),
     },
   })
 

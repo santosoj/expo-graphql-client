@@ -6,9 +6,16 @@ import { Theme } from '../../theme/restyle-theme'
 
 import arrowUpDown from '../../graphics/arrowupdown.png'
 
+export type SortDirection = 'asc' | 'desc'
+
+export type SortArgs = {
+  sortDirections: SortDirection[]
+  keys: string[]
+}
+
 export type DisplayNameSortOption = {
-  displayName: string,
-  key: string
+  displayName: string
+  args: SortArgs
 }
 
 export type SortOption = string | DisplayNameSortOption
@@ -21,19 +28,11 @@ export function sortOptionDisplayName(opt: SortOption): string {
   }
 }
 
-export function sortOptionKey(opt: SortOption): string {
-  if (typeof opt === 'string') {
-    return opt
-  } else {
-    return opt.key
-  }
-}
-
 interface SortControlProps {
   options: SortOption[]
   selectedIndex: number
   toggleStatus: boolean
-  onSelectedIndexChanged: (index: number, value: string) => void
+  onSelectedIndexChanged: (index: number) => void
   onToggleStatusChanged: (status: boolean) => void
 }
 
@@ -60,8 +59,7 @@ function SortControl({
         selectedIndex={new IndexPath(selectedIndex)}
         value={sortOptionDisplayName(options[selectedIndex])}
         onSelect={(index) => {
-          if (!Array.isArray(index))
-            return onSelectedIndexChanged(index.row, sortOptionKey(options[index.row]))
+          if (!Array.isArray(index)) return onSelectedIndexChanged(index.row)
         }}
         style={{
           marginRight: spacing.small,
@@ -70,7 +68,7 @@ function SortControl({
         }}
       >
         {options.map((value, index) => (
-          <SelectItem key={index} title={value} />
+          <SelectItem key={index} title={sortOptionDisplayName(value)} />
         ))}
       </Select>
 
