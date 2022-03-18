@@ -44,7 +44,6 @@ function DirectorDetail({
 
   useEffect(() => {
     if (director) {
-      console.log(JSON.stringify(director))
       navigation.setOptions({ title: director.name })
     }
   }, [director])

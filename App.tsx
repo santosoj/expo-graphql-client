@@ -1,4 +1,10 @@
-import { Dimensions, StyleSheet, useWindowDimensions, View } from 'react-native'
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  useWindowDimensions,
+  View,
+} from 'react-native'
 import * as Font from 'expo-font'
 import AppLoading from 'expo-app-loading'
 
@@ -13,7 +19,7 @@ import {
   NavigationContainer,
   StackRouter,
 } from '@react-navigation/native'
-import { createStackNavigator } from '@react-navigation/stack'
+import { createStackNavigator, StackHeaderProps } from '@react-navigation/stack'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { Icon, IconRegistry, TabBar, Tab, Layout } from '@ui-kitten/components'
 import { EvaIconsPack } from '@ui-kitten/eva-icons'
@@ -45,6 +51,7 @@ import getFilm from './graphql/getFilm.graphql'
 import SortControl from './components/SortControl'
 import ResponsiveScreen from './components/ResponsiveScreen'
 import AppHeader from './components/AppHeader'
+import StackNavigationHeader from './components/StackNavigationHeader'
 
 import FilmDetail from './screens/FilmDetail'
 import FilmList from './screens/FilmList'
@@ -97,44 +104,6 @@ const stackScreenOptions = ({ colors }: Theme) => ({
   headerTitleStyle: { fontFamily: 'Barlow' },
 })
 
-function FilmStack() {
-  const _theme = useTheme<Theme>()
-
-  return (
-    <Stack.Navigator screenOptions={stackScreenOptions(_theme)}>
-      <Stack.Screen
-        name='Films'
-        component={FilmList}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name='Film'
-        component={FilmDetail}
-        options={{ title: '' }}
-      />
-    </Stack.Navigator>
-  )
-}
-
-function DirectorStack() {
-  const _theme = useTheme<Theme>()
-
-  return (
-    <Stack.Navigator screenOptions={stackScreenOptions(_theme)}>
-      <Stack.Screen
-        name='Directors'
-        component={DirectorList}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name='Director'
-        component={DirectorDetail}
-        options={{ title: '' }}
-      />
-    </Stack.Navigator>
-  )
-}
-
 const Stack = createStackNavigator()
 const { Navigator, Screen: TabScreen } = createMaterialTopTabNavigator()
 
@@ -167,16 +136,39 @@ const TopTabBar = ({ navigation, state }: any) => {
   )
 }
 
-const TabNavigator = () => (
-  <Navigator tabBar={(props: any) => <TopTabBar {...props} />}>
-    <TabScreen name='FilmsScreen' component={FilmStack} />
-    <TabScreen name='DirectorsScreen' component={DirectorStack} />
-    <TabScreen name='AboutScreen' component={AboutScreen} />
-  </Navigator>
-)
+function StackHeader(props: StackHeaderProps) {
+  const {
+    navigation,
+    options: { headerShown, title },
+    route: { name: currentRouteName },
+  } = props
+  const index = {
+    Films: 0,
+    Film: 0,
+    Directors: 1,
+    Director: 1,
+    About: 2,
+  }[currentRouteName]
+
+  const navState = props.navigation.getState()
+  console.log(navState)
+
+  return (
+    <>
+      <TopTabBar
+        navigation={navigation}
+        state={{ index, routeNames: ['Films', 'Directors', 'About'] }}
+      />
+      {!!headerShown && (
+        <StackNavigationHeader title={title} navigation={props.navigation} />
+      )}
+    </>
+  )
+}
 
 export default function App() {
   const [fontsLoaded, setFontsLoded] = useState(false)
+  const _theme = useTheme<Theme>()
 
   if (!fontsLoaded) {
     return (
@@ -199,12 +191,30 @@ export default function App() {
           customMapping={kittenMapping}
         >
           <NavigationContainer>
-            {/* <Stack.Navigator>
-            <Stack.Screen name='FilmList' component={FilmListScreen} />
-          </Stack.Navigator> */}
             <ResponsiveScreen>
               <AppHeader />
-              <TabNavigator />
+              <Stack.Navigator screenOptions={{ header: StackHeader }}>
+                <Stack.Screen
+                  name='Films'
+                  component={FilmList}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name='Film'
+                  component={FilmDetail}
+                  options={{ title: '' }}
+                />
+                <Stack.Screen
+                  name='Directors'
+                  component={DirectorList}
+                  options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                  name='Director'
+                  component={DirectorDetail}
+                  options={{ title: '' }}
+                />
+              </Stack.Navigator>
             </ResponsiveScreen>
           </NavigationContainer>
         </ApplicationProvider>
