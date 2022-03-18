@@ -8,7 +8,6 @@ import letterSpacings from '../tokens/letterSpacings'
 import lineHeights from '../tokens/lineHeights'
 import mediaQueries from '../tokens/mediaQueries'
 import radii from '../tokens/radii'
-import shadows from '../tokens/shadows'
 import spacing from '../tokens/spacing'
 
 type Breakpoints =
@@ -20,29 +19,33 @@ type Breakpoints =
 
 type Radii = 'hard' | 'rounded' | 'soft' | 'circle'
 
+type Spacing = 'tiny' | 'small' | 'medium' | 'big' | 'large' | 'huge'
+
+type FontSize = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'paragraph' | 'sub'
+
+type LetterSpacing = 'regular' | 'wide' | 'tight'
+
+function stripPx<K extends string>(dict: { [key in K]: string }) {
+  return Object.entries(dict).reduce(
+    (acc, [key, value]) => ({
+      ...acc,
+      // @ts-ignore
+      [key]: Number(value.slice(0, -2)),
+    }),
+    {}
+  ) as { [key in K]: number }
+}
+
 const theme = createTheme({
   colors,
-  spacing,
-  breakpoints: Object.entries(mediaQueries).reduce(
-    (acc, [key, value]) => ({
-      ...acc,
-      [key]: Number(value.slice(0, -2)),
-    }),
-    {}
-  ) as { [key in Breakpoints]: number },
+  spacing: stripPx<Spacing>(spacing),
+  breakpoints: stripPx<Breakpoints>(mediaQueries),
   fontFamilies,
-  fontSizes,
+  fontSizes: stripPx<FontSize>(fontSizes),
   fontWeights,
-  letterSpacings,
+  letterSpacings: stripPx<LetterSpacing>(letterSpacings),
   lineHeights,
-  radii: Object.entries(radii).reduce(
-    (acc, [key, value]) => ({
-      ...acc,
-      [key]: Number(value.slice(0, -2)),
-    }),
-    {}
-  ) as { [key in Radii]: number },
-  shadows,
+  radii: stripPx<Radii>(radii),
   textVariants: {
     header: {
       fontFamily: 'Barlow',
@@ -64,7 +67,7 @@ const theme = createTheme({
       lineHeight: 24,
       color: 'black',
     },
-  }  
+  },
 })
 
 export type Theme = typeof theme
