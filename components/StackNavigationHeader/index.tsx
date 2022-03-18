@@ -1,7 +1,7 @@
-import { GestureResponderEvent, Image } from 'react-native'
+import { GestureResponderEvent, Image, useWindowDimensions } from 'react-native'
 import { Link, ParamListBase } from '@react-navigation/native'
 import { To } from '@react-navigation/native/lib/typescript/src/useLinkTo'
-import { createBox, createText } from '@shopify/restyle'
+import { createBox, createText, useTheme } from '@shopify/restyle'
 import { Theme } from '../../theme/restyle-theme'
 
 import ChevronLeft from '../../graphics/chevron-left.png'
@@ -21,6 +21,10 @@ function StackNavigationHeader({
   title,
   navigation,
 }: StackNavigationHeaderProps) {
+  const { breakpoints } = useTheme<Theme>()
+  const { width } = useWindowDimensions()
+  const horizontalPadding = width >= breakpoints.desktopMin ? 0 : 10
+
   const handleLinkPress = useCallback((ev) => {
     ev.preventDefault()
     if (navigation.canGoBack()) {
@@ -34,6 +38,10 @@ function StackNavigationHeader({
       alignItems='center'
       backgroundColor='white'
       paddingVertical='small'
+      style={{
+        paddingLeft: horizontalPadding,
+        paddingRight: horizontalPadding,
+      }}
     >
       <Link to={{ screen: '' }} onPress={handleLinkPress}>
         <Image source={ChevronLeft} style={{ width: 30, height: 30 }} />
