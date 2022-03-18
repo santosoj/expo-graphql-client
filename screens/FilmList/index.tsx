@@ -33,6 +33,7 @@ function FilmList() {
   const renderItem = useCallback(({ item }: { item: any }) => {
     return (
       <Card
+        key={item._id}
         line1={item.title}
         line2={item.year}
         line3={item.directorsText}
@@ -44,6 +45,7 @@ function FilmList() {
 
   return (
     <Box flex={1} backgroundColor='white' style={{ paddingTop: 32 }}>
+
       <SortControl
         options={sortOptions}
         selectedIndex={selectedIndex}
@@ -56,10 +58,11 @@ function FilmList() {
           <FlatList
             data={data.films}
             renderItem={renderItem}
-            style={[{ minHeight: 'min-content', paddingBottom: 150 }]}
+            style={[{ paddingBottom: 150 }]}
           />
         )}
       </Box>
+      
     </Box>
   )
 }
