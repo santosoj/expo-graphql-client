@@ -96,12 +96,12 @@ function DirectorDetail({
             <Text variant='body' paddingTop='small' paddingRight='small'>
               {director.extract}
             </Text>
-            <Box flexDirection='row' paddingTop='medium'>
+            <Box flexDirection='row' paddingTop='medium' alignItems='center'>
               {!!director.contentURLs && (
                 <ExternalLink href={director.contentURLs.desktop.page}>
                   <Image
                     source={WikipediaIcon}
-                    style={{ width: 64, height: 32 }}
+                    style={{ width: 34, height: 34 }}
                   />
                 </ExternalLink>
               )}

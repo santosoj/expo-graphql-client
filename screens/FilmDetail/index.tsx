@@ -90,14 +90,14 @@ function FilmDetail({
             <Text variant='body' paddingTop='medium' paddingRight='small'>
               {film.wikipedia.plotShort.plainText.replaceAll('\n', '\n\n')}
             </Text>
-            <Box flexDirection='row' paddingTop='medium'>
+            <Box flexDirection='row' paddingTop='medium' alignItems='center'>
               <ExternalLink href={`https://www.imdb.com/title/${film.imdbID}/`}>
                 <Image source={IMDBIcon} style={{ width: 64, height: 32 }} />
               </ExternalLink>
               <ExternalLink href={film.wikipedia.url}>
                 <Image
                   source={WikipediaIcon}
-                  style={{ width: 64, height: 32, marginLeft: 16 }}
+                  style={{ width: 34, height: 34, marginLeft: 16 }}
                 />
               </ExternalLink>
             </Box>
