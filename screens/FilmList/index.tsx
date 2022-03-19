@@ -4,6 +4,7 @@ import { Link } from '@react-navigation/native'
 import { createBox } from '@shopify/restyle'
 
 import { StackParamList } from '../types'
+import { StackScreenProps } from '@react-navigation/stack'
 
 import { useQuery } from 'urql'
 
@@ -15,7 +16,8 @@ import Card from '../../components/Card'
 import SortControl from '../../components/SortControl'
 
 import { Theme } from '../../theme/restyle-theme'
-import { StackScreenProps } from '@react-navigation/stack'
+
+import { FilmImages } from '../../assets/content-images'
 
 const Box = createBox<Theme>()
 
@@ -43,7 +45,7 @@ function FilmList({ navigation }: StackScreenProps<StackParamList, 'Films'>) {
         line1={item.title}
         line2={item.year}
         line3={item.directorsText}
-        imageSource={{ uri: item.image }}
+        imageSource={FilmImages[Number(item._id)]}
         onPress={handleCardPress}
       />
     )

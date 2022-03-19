@@ -3,6 +3,9 @@ import { FlatList, GestureResponderEvent, StyleSheet, Text } from 'react-native'
 import { Link } from '@react-navigation/native'
 import { createBox } from '@shopify/restyle'
 
+import { StackScreenProps } from '@react-navigation/stack'
+import { StackParamList } from '../types'
+
 import { useQuery } from 'urql'
 
 import allDirectors from '../../graphql/getAllDirectors.graphql'
@@ -15,9 +18,7 @@ import SortControl, {
 
 import { Theme } from '../../theme/restyle-theme'
 
-import PersonPlaceholder from '../../graphics/personPlaceholder.png'
-import { StackScreenProps } from '@react-navigation/stack'
-import { StackParamList } from '../types'
+import { DirectorImages } from '../../assets/content-images'
 
 const MAXINT32 = 0x7fffffff
 
@@ -70,9 +71,7 @@ function DirectorList({ navigation }: StackScreenProps<StackParamList, 'Director
             : ''
         }`}
         line3={item.film.title}
-        imageSource={
-          !!item.thumbnail ? { uri: item.thumbnail.source } : PersonPlaceholder
-        }
+        imageSource={DirectorImages[Number(item._id)]}
         onPress={handleCardPress}
       />
     )
