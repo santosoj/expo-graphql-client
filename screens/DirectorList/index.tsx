@@ -1,6 +1,5 @@
-import { useCallback, useRef, useState } from 'react'
-import { FlatList, GestureResponderEvent, StyleSheet, Text } from 'react-native'
-import { Link } from '@react-navigation/native'
+import { useCallback, useState } from 'react'
+import { FlatList } from 'react-native'
 import { createBox } from '@shopify/restyle'
 
 import { StackScreenProps } from '@react-navigation/stack'
@@ -11,10 +10,11 @@ import { useQuery } from 'urql'
 import allDirectors from '../../graphql/getAllDirectors.graphql'
 
 import Card from '../../components/Card'
-import SortControl, {
-  DisplayNameSortOption,
+import SortControl from '../../components/SortControl'
+import {
+  SortOption,
   toggleSortDirections,
-} from '../../components/SortControl'
+} from '../../components/SortControl/sorting'
 
 import { Theme } from '../../theme/restyle-theme'
 
@@ -24,37 +24,36 @@ const MAXINT32 = 0x7fffffff
 
 const Box = createBox<Theme>()
 
-function DirectorList({ navigation }: StackScreenProps<StackParamList, 'Directors'>) {
-  const sortOptions: DisplayNameSortOption[] = [
-    {
-      displayName: 'Name',
-      args: { sortDirections: ['asc'], keys: ['lexKey'] },
+export const DirectorListSortOptions: SortOption[] = [
+  {
+    displayName: 'Name',
+    args: { order: ['asc'], fields: ['lexKey'] },
+  },
+  {
+    displayName: 'Year of birth',
+    args: { order: ['asc', 'asc'], fields: ['birthYear', 'lexKey'] },
+  },
+  {
+    displayName: 'Year of death',
+    args: {
+      order: ['asc', 'asc', 'asc'],
+      fields: ['deathYear', 'birthYear', 'lexKey'],
     },
-    {
-      displayName: 'Year of birth',
-      args: { sortDirections: ['asc', 'asc'], keys: ['birthYear', 'lexKey'] },
-    },
-    {
-      displayName: 'Year of death',
-      args: {
-        sortDirections: ['asc', 'asc', 'asc'],
-        keys: ['deathYear', 'birthYear', 'lexKey'],
-      },
-    },
-  ]
+  },
+]
 
+function DirectorList({
+  navigation,
+}: StackScreenProps<StackParamList, 'Directors'>) {
   const [selectedIndex, setSelectedIndex] = useState(2)
   const [toggleStatus, setToggleStatus] = useState(false)
 
   const [{ fetching, data, error }] = useQuery({
     query: allDirectors,
-    variables: {
-      fields: sortOptions[selectedIndex].args.keys,
-      order: toggleSortDirections(
-        sortOptions[selectedIndex].args.sortDirections,
-        toggleStatus
-      ),
-    },
+    variables: toggleSortDirections(
+      DirectorListSortOptions[selectedIndex],
+      toggleStatus
+    ).args,
   })
 
   const renderItem = useCallback(({ item }: { item: any }) => {
@@ -80,7 +79,7 @@ function DirectorList({ navigation }: StackScreenProps<StackParamList, 'Director
   return (
     <Box flex={1} backgroundColor='white' style={{ paddingTop: 32 }}>
       <SortControl
-        options={sortOptions}
+        options={DirectorListSortOptions}
         selectedIndex={selectedIndex}
         toggleStatus={toggleStatus}
         onSelectedIndexChanged={setSelectedIndex}
@@ -92,7 +91,7 @@ function DirectorList({ navigation }: StackScreenProps<StackParamList, 'Director
             data={data.directors}
             renderItem={renderItem}
             keyExtractor={(_, index) => String(index)}
-            contentContainerStyle={{paddingBottom: 150}}
+            contentContainerStyle={{ paddingBottom: 150 }}
           />
         )}
       </Box>

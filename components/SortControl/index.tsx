@@ -4,39 +4,9 @@ import { IndexPath, Select, SelectItem, Toggle } from '@ui-kitten/components'
 import { useTheme } from '@shopify/restyle'
 import { Theme } from '../../theme/restyle-theme'
 
+import { SortOption } from './sorting'
+
 import arrowUpDown from '../../graphics/arrowupdown.png'
-
-export type SortDirection = 'asc' | 'desc'
-
-export type SortArgs = {
-  sortDirections: SortDirection[]
-  keys: string[]
-}
-
-export type DisplayNameSortOption = {
-  displayName: string
-  args: SortArgs
-}
-
-export type SortOption = string | DisplayNameSortOption
-
-export function sortOptionDisplayName(opt: SortOption): string {
-  if (typeof opt === 'string') {
-    return opt
-  } else {
-    return opt.displayName
-  }
-}
-
-export function toggleSortDirections(
-  sortDirections: SortDirection[],
-  toggleStatus: boolean
-) {
-  if (toggleStatus) {
-    return sortDirections.map((d) => (d === 'asc' ? 'desc' : 'asc'))
-  }
-  return sortDirections
-}
 
 interface SortControlProps {
   options: SortOption[]
@@ -67,7 +37,7 @@ function SortControl({
     >
       <Select
         selectedIndex={new IndexPath(selectedIndex)}
-        value={sortOptionDisplayName(options[selectedIndex])}
+        value={options[selectedIndex].displayName}
         onSelect={(index) => {
           if (!Array.isArray(index)) return onSelectedIndexChanged(index.row)
         }}
@@ -78,7 +48,7 @@ function SortControl({
         }}
       >
         {options.map((value, index) => (
-          <SelectItem key={index} title={sortOptionDisplayName(value)} />
+          <SelectItem key={index} title={value.displayName} />
         ))}
       </Select>
 
