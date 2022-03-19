@@ -1,7 +1,7 @@
 import React, { useCallback, useRef, useState } from 'react'
-import { FlatList, Image, StyleSheet } from 'react-native'
+import { FlatList, Image, ScrollView, StyleSheet } from 'react-native'
 import { Link, Route } from '@react-navigation/native'
-import { createBox, createText } from '@shopify/restyle'
+import { createBox, createText, useTheme } from '@shopify/restyle'
 
 import ExternalLink from '../../components/ExternalLink'
 
@@ -27,6 +27,8 @@ function FilmDetail({
 }: StackScreenProps<StackParamList, 'Film'>) {
   const { id } = route.params
 
+  const { colors } = useTheme<Theme>()
+
   const [{ fetching, data, error }] = useQuery({
     query: getFilm,
     variables: {
@@ -43,13 +45,9 @@ function FilmDetail({
   }, [film])
 
   return (
-    <Box
-      flex={1}
-      backgroundColor='white'
-      style={{ overflow: 'scroll', paddingBottom: 150 }}
-    >
+    <ScrollView style={{backgroundColor: colors.white}}>
       {!!film && (
-        <>
+        <Box paddingBottom='huge'>
           <Image
             source={{ uri: film.image }}
             style={{ height: 240 }}
@@ -85,7 +83,7 @@ function FilmDetail({
               </>
             </Box>
             <Text variant='body' paddingTop='medium' paddingRight='small'>
-              {film.wikipedia.plotShort.plainText.replaceAll('\n', '\n\n')}
+              {film.wikipedia.plotShort.plainText.split('\n').join('\n\n')}
             </Text>
             <Box flexDirection='row' paddingTop='medium' alignItems='center'>
               <ExternalLink href={`https://www.imdb.com/title/${film.imdbID}/`}>
@@ -99,9 +97,9 @@ function FilmDetail({
               </ExternalLink>
             </Box>
           </Box>
-        </>
+        </Box>
       )}
-    </Box>
+    </ScrollView>
   )
 }
 

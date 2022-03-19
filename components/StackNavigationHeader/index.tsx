@@ -1,4 +1,4 @@
-import { GestureResponderEvent, Image, useWindowDimensions } from 'react-native'
+import { GestureResponderEvent, Image, TouchableOpacity, useWindowDimensions } from 'react-native'
 import { Link, ParamListBase } from '@react-navigation/native'
 import { To } from '@react-navigation/native/lib/typescript/src/useLinkTo'
 import { createBox, createText, useTheme } from '@shopify/restyle'
@@ -26,7 +26,6 @@ function StackNavigationHeader({
   const horizontalPadding = width >= breakpoints.desktopMin ? 0 : 10
 
   const handleLinkPress = useCallback((ev) => {
-    ev.preventDefault()
     if (navigation.canGoBack()) {
       navigation.goBack()
     }
@@ -43,9 +42,11 @@ function StackNavigationHeader({
         paddingRight: horizontalPadding,
       }}
     >
-      <Link to={{ screen: '' }} onPress={handleLinkPress}>
-        <Image source={ChevronLeft} style={{ width: 30, height: 30 }} />
-      </Link>
+      {/* <Link to={{ screen: '' }} onPress={handleLinkPress}> */}
+      <TouchableOpacity onPress={handleLinkPress}>
+        <Image source={ChevronLeft} style={{ width: 30, height: 30 }} resizeMode='contain' />
+      </TouchableOpacity>
+      {/* </Link> */}
       <Text
         variant='body'
         numberOfLines={1}
