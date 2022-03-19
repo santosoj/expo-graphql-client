@@ -28,7 +28,8 @@ interface CardProps {
 function KnownFor({ title, linkTo }: CardProps) {
   return (
     <View style={{ flexDirection: 'column' }}>
-      <UIKittenCard style={{borderRadius: 8}}>
+      {/* @ts-ignore */}
+      <UIKittenCard style={{borderRadius: 8, cursor: 'default'}  }>
         <View>
           <Text variant='body' numberOfLines={1} style={{ fontWeight: '600' }}>
             Known for
