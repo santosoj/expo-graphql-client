@@ -63,7 +63,7 @@ function Card({ line1, line2, line3, imageSource, onPress }: CardProps) {
           </Box>
         </Box>
       </UIKittenCard>
-      <Box style={{ backgroundColor: 'magenta' }}>
+      <Box>
         <ImageBackground source={Shadow} style={{ height: SHADOW_HEIGHT }} />
       </Box>
     </Box>
