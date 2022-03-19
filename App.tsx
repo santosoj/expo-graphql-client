@@ -19,7 +19,7 @@ import {
   NavigationContainer,
   StackRouter,
 } from '@react-navigation/native'
-import { createStackNavigator, StackHeaderProps } from '@react-navigation/stack'
+import { createStackNavigator, StackHeaderProps, StackNavigationOptions } from '@react-navigation/stack'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { Icon, IconRegistry, TabBar, Tab, Layout } from '@ui-kitten/components'
 import { EvaIconsPack } from '@ui-kitten/eva-icons'
@@ -51,7 +51,7 @@ import getFilm from './graphql/getFilm.graphql'
 import SortControl from './components/SortControl'
 import ResponsiveScreen from './components/ResponsiveScreen'
 import AppHeader from './components/AppHeader'
-import StackNavigationHeader from './components/StackNavigationHeader'
+import TabbedStackNavigationHeader from './components/TabbedStackNavigationHeader'
 
 import FilmDetail from './screens/FilmDetail'
 import FilmList from './screens/FilmList'
@@ -151,6 +151,7 @@ function StackHeader(props: StackHeaderProps) {
   }[currentRouteName]
 
   const navState = props.navigation.getState()
+  const stackHeaderShown = ['Film', 'Director'].includes(currentRouteName)
 
   return (
     <>
@@ -158,8 +159,8 @@ function StackHeader(props: StackHeaderProps) {
         navigation={navigation}
         state={{ index, routeNames: ['Films', 'Directors', 'About'] }}
       />
-      {!!headerShown && (
-        <StackNavigationHeader title={title} navigation={props.navigation} />
+      {stackHeaderShown && (
+        <TabbedStackNavigationHeader title={title} navigation={props.navigation} />
       )}
     </>
   )
@@ -196,7 +197,6 @@ export default function App() {
                 <Stack.Screen
                   name='Films'
                   component={FilmList}
-                  options={{ headerShown: false }}
                 />
                 <Stack.Screen
                   name='Film'
@@ -206,7 +206,6 @@ export default function App() {
                 <Stack.Screen
                   name='Directors'
                   component={DirectorList}
-                  options={{ headerShown: false }}
                 />
                 <Stack.Screen
                   name='Director'
@@ -221,3 +220,5 @@ export default function App() {
     </GraphQLProvider>
   )
 }
+
+type asgkdfg = StackNavigationOptions

@@ -1,7 +1,7 @@
 import React, { useCallback, useRef, useState } from 'react'
-import { FlatList, Image, StyleSheet } from 'react-native'
+import { FlatList, Image, ScrollView, StyleSheet } from 'react-native'
 import { Link, Route } from '@react-navigation/native'
-import { createBox, createText } from '@shopify/restyle'
+import { createBox, createText, useTheme } from '@shopify/restyle'
 
 import ExternalLink from '../../components/ExternalLink'
 
@@ -32,6 +32,7 @@ function DirectorDetail({
   navigation,
 }: StackScreenProps<DirectorStackParamList, 'Director'>) {
   const { id } = route.params
+  const { colors } = useTheme<Theme>()
 
   const [{ fetching, data, error }] = useQuery({
     query: getDirector,
@@ -49,15 +50,11 @@ function DirectorDetail({
   }, [director])
 
   return (
-    <Box
-      flex={1}
-      backgroundColor='white'
-      style={{ overflow: 'scroll', paddingBottom: 150 }}
-    >
+    <ScrollView style={{backgroundColor: colors.white}}>
       {!!director && (
-        <>
+        <Box paddingBottom='huge'>
           <Image
-            source={director.film.image}
+            source={{uri: director.film.image}}
             style={{ height: 240 }}
             resizeMode='cover'
           />
@@ -106,9 +103,9 @@ function DirectorDetail({
               )}
             </Box>
           </Box>
-        </>
+        </Box>
       )}
-    </Box>
+    </ScrollView>
   )
 }
 

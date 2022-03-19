@@ -1,4 +1,9 @@
-import { GestureResponderEvent, Image, TouchableOpacity, useWindowDimensions } from 'react-native'
+import {
+  GestureResponderEvent,
+  Image,
+  TouchableOpacity,
+  useWindowDimensions,
+} from 'react-native'
 import { Link, ParamListBase } from '@react-navigation/native'
 import { To } from '@react-navigation/native/lib/typescript/src/useLinkTo'
 import { createBox, createText, useTheme } from '@shopify/restyle'
@@ -12,15 +17,15 @@ import { useCallback } from 'react'
 const Box = createBox<Theme>()
 const Text = createText<Theme>()
 
-interface StackNavigationHeaderProps {
+interface TabbedStackNavigationHeaderProps {
   title?: string
   navigation: StackNavigationProp<ParamListBase, string>
 }
 
-function StackNavigationHeader({
+function TabbedStackNavigationHeader({
   title,
   navigation,
-}: StackNavigationHeaderProps) {
+}: TabbedStackNavigationHeaderProps) {
   const { breakpoints } = useTheme<Theme>()
   const { width } = useWindowDimensions()
   const horizontalPadding = width >= breakpoints.desktopMin ? 0 : 10
@@ -42,11 +47,13 @@ function StackNavigationHeader({
         paddingRight: horizontalPadding,
       }}
     >
-      {/* <Link to={{ screen: '' }} onPress={handleLinkPress}> */}
       <TouchableOpacity onPress={handleLinkPress}>
-        <Image source={ChevronLeft} style={{ width: 30, height: 30 }} resizeMode='contain' />
+        <Image
+          source={ChevronLeft}
+          style={{ width: 30, height: 30 }}
+          resizeMode='contain'
+        />
       </TouchableOpacity>
-      {/* </Link> */}
       <Text
         variant='body'
         numberOfLines={1}
@@ -59,4 +66,4 @@ function StackNavigationHeader({
   )
 }
 
-export default StackNavigationHeader
+export default TabbedStackNavigationHeader
