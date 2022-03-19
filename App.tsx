@@ -151,7 +151,6 @@ function StackHeader(props: StackHeaderProps) {
   }[currentRouteName]
 
   const navState = props.navigation.getState()
-  console.log(navState)
 
   return (
     <>

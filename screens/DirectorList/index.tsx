@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState } from 'react'
-import { FlatList, StyleSheet, Text } from 'react-native'
+import { FlatList, GestureResponderEvent, StyleSheet, Text } from 'react-native'
 import { Link } from '@react-navigation/native'
 import { createBox } from '@shopify/restyle'
 
@@ -10,18 +10,20 @@ import allDirectors from '../../graphql/getAllDirectors.graphql'
 import Card from '../../components/Card'
 import SortControl, {
   DisplayNameSortOption,
-  toggleSortDirections
+  toggleSortDirections,
 } from '../../components/SortControl'
 
 import { Theme } from '../../theme/restyle-theme'
 
 import PersonPlaceholder from '../../graphics/personPlaceholder.png'
+import { StackScreenProps } from '@react-navigation/stack'
+import { StackParamList } from '../types'
 
 const MAXINT32 = 0x7fffffff
 
 const Box = createBox<Theme>()
 
-function DirectorList() {
+function DirectorList({ navigation }: StackScreenProps<StackParamList, 'Directors'>) {
   const sortOptions: DisplayNameSortOption[] = [
     {
       displayName: 'Name',
@@ -55,6 +57,10 @@ function DirectorList() {
   })
 
   const renderItem = useCallback(({ item }: { item: any }) => {
+    const handleCardPress = () => {
+      navigation.navigate('Director', { id: Number(item._id) })
+    }
+
     return (
       <Card
         line1={item.name}
@@ -67,7 +73,7 @@ function DirectorList() {
         imageSource={
           !!item.thumbnail ? { uri: item.thumbnail.source } : PersonPlaceholder
         }
-        linkTo={{ screen: 'Director', params: { id: item._id } }}
+        onPress={handleCardPress}
       />
     )
   }, [])
@@ -86,6 +92,7 @@ function DirectorList() {
           <FlatList
             data={data.directors}
             renderItem={renderItem}
+            keyExtractor={(_, index) => String(index)}
             style={[{ minHeight: 'min-content', paddingBottom: 150 }]}
           />
         )}

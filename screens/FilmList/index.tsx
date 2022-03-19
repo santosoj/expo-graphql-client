@@ -1,7 +1,9 @@
 import { useCallback, useRef, useState } from 'react'
-import { FlatList, StyleSheet, Text } from 'react-native'
+import { FlatList, GestureResponderEvent, StyleSheet, Text } from 'react-native'
 import { Link } from '@react-navigation/native'
 import { createBox } from '@shopify/restyle'
+
+import { StackParamList } from '../types'
 
 import { useQuery } from 'urql'
 
@@ -13,10 +15,11 @@ import Card from '../../components/Card'
 import SortControl from '../../components/SortControl'
 
 import { Theme } from '../../theme/restyle-theme'
+import { StackScreenProps } from '@react-navigation/stack'
 
 const Box = createBox<Theme>()
 
-function FilmList() {
+function FilmList({ navigation }: StackScreenProps<StackParamList, 'Films'>) {
   const sortOptions = ['Title', 'Year']
 
   const [selectedIndex, setSelectedIndex] = useState(0)
@@ -31,21 +34,23 @@ function FilmList() {
   })
 
   const renderItem = useCallback(({ item }: { item: any }) => {
+    const handleCardPress = () => {
+      navigation.navigate('Film', { id: Number(item._id) })
+    }
+
     return (
       <Card
-        key={item._id}
         line1={item.title}
         line2={item.year}
         line3={item.directorsText}
         imageSource={{ uri: item.image }}
-        linkTo={{ screen: 'Film', params: { id: item._id } }}
+        onPress={handleCardPress}
       />
     )
   }, [])
 
   return (
     <Box flex={1} backgroundColor='white' style={{ paddingTop: 32 }}>
-
       <SortControl
         options={sortOptions}
         selectedIndex={selectedIndex}
@@ -53,16 +58,16 @@ function FilmList() {
         onSelectedIndexChanged={setSelectedIndex}
         onToggleStatusChanged={setToggleStatus}
       />
-      <Box style={{ paddingTop: 32, flex: 1 }}>
+      <Box flex={1} style={{ paddingTop: 32 }}>
         {!!data?.films && (
           <FlatList
             data={data.films}
             renderItem={renderItem}
+            keyExtractor={(_, index) => String(index)}
             style={[{ paddingBottom: 150 }]}
           />
         )}
       </Box>
-      
     </Box>
   )
 }

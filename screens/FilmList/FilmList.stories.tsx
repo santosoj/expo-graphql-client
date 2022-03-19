@@ -19,4 +19,8 @@ const Template: ComponentStory<typeof FilmList> = (args) => (
 
 export const Default = Template.bind({})
 Default.args = {
+  // @ts-ignore
+  navigation: {
+    navigate: () => {}
+  }
 }

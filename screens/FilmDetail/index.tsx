@@ -16,18 +16,15 @@ import IMDBIcon from '../../graphics/imdb.png'
 import WikipediaIcon from '../../graphics/wikipedia.png'
 import { useEffect } from 'react'
 
+import { StackParamList } from '../types'
+
 const Box = createBox<Theme>()
 const Text = createText<Theme>()
-
-type FilmStackParamList = {
-  Films: undefined
-  Film: { id: number }
-}
 
 function FilmDetail({
   route,
   navigation,
-}: StackScreenProps<FilmStackParamList, 'Film'>) {
+}: StackScreenProps<StackParamList, 'Film'>) {
   const { id } = route.params
 
   const [{ fetching, data, error }] = useQuery({

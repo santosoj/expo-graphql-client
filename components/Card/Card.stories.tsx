@@ -35,6 +35,7 @@ Default.args = {
   line2: '1999',
   line3: 'Gil Junger',
   imageSource: SampleImage,
+  onPress: () => {}
 }
 
 export const Multiple = MultipleTemplate.bind({})
