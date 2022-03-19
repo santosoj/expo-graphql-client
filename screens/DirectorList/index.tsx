@@ -27,17 +27,17 @@ const Box = createBox<Theme>()
 export const DirectorListSortOptions: SortOption[] = [
   {
     displayName: 'Name',
-    args: { order: ['asc'], fields: ['lexKey'] },
+    args: { fields: ['lexKey'], order: ['asc'] },
   },
   {
     displayName: 'Year of birth',
-    args: { order: ['asc', 'asc'], fields: ['birthYear', 'lexKey'] },
+    args: { fields: ['birthYear', 'lexKey'], order: ['asc', 'asc'] },
   },
   {
     displayName: 'Year of death',
     args: {
-      order: ['asc', 'asc', 'asc'],
       fields: ['deathYear', 'birthYear', 'lexKey'],
+      order: ['asc', 'asc', 'asc']
     },
   },
 ]

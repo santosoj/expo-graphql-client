@@ -26,3 +26,12 @@ export function toggleSortDirections(
     },
   }
 }
+
+export function allSortArgs(sortOptions: SortOption[]): SortArgs[] {
+  const allSortArgs: SortArgs[] = []
+  for (let opt of sortOptions) {
+    allSortArgs.push(opt.args)
+    allSortArgs.push(toggleSortDirections(opt, true).args)
+  }
+  return allSortArgs
+}

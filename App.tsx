@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useWindowDimensions } from 'react-native'
 
 import * as Font from 'expo-font'
@@ -32,6 +32,10 @@ import getDirector from './graphql/getDirector.graphql'
 
 import getAllFilms from './graphql/getAllFilms.graphql'
 import getFilm from './graphql/getFilm.graphql'
+
+import { allSortArgs } from './components/SortControl/sorting'
+import { DirectorListSortOptions } from './screens/DirectorList'
+import { FilmListSortOptions } from './screens/FilmList'
 
 import ResponsiveScreen from './components/ResponsiveScreen'
 import AppHeader from './components/AppHeader'
@@ -158,6 +162,10 @@ function StackHeader(props: StackHeaderProps) {
 export default function App() {
   const [preloaded, setPreloaded] = useState(false)
   const _theme = useTheme<Theme>()
+
+  useEffect(() => {
+    console.log(JSON.stringify(allSortArgs(DirectorListSortOptions)))
+  }, [])
 
   if (!preloaded) {
     return (

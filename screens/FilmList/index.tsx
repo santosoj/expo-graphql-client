@@ -25,11 +25,11 @@ const Box = createBox<Theme>()
 export const FilmListSortOptions: SortOption[] = [
   {
     displayName: 'Title',
-    args: { order: ['asc'], fields: ['title'] },
+    args: { fields: ['title'], order: ['asc'] },
   },
   {
     displayName: 'Year',
-    args: { order: ['asc'], fields: ['year'] },
+    args: { fields: ['year'], order: ['asc'] },
   },
 ]
 
