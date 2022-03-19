@@ -1,21 +1,23 @@
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useEffect } from 'react'
 import { FlatList, Image, ScrollView, StyleSheet } from 'react-native'
 import { Link, Route } from '@react-navigation/native'
 import { createBox, createText, useTheme } from '@shopify/restyle'
 
-import ExternalLink from '../../components/ExternalLink'
+import { StackScreenProps } from '@react-navigation/stack'
 
 import { useQuery } from 'urql'
 import getDirector from '../../graphql/getDirector.graphql'
 
+import ExternalLink from '../../components/ExternalLink'
+import KnownFor from '../../components/KnownFor'
+
 import { Theme } from '../../theme/restyle-theme'
-import { StackScreenProps } from '@react-navigation/stack'
 
 import ExternalLinkIcon from '../../graphics/external-link.png'
 import PersonPlaceholder from '../../graphics/personPlaceholder.png'
 import WikipediaIcon from '../../graphics/wikipedia.png'
-import { useEffect } from 'react'
-import KnownFor from '../../components/KnownFor'
+
+import { DirectorImages } from '../../assets/content-images'
 
 const Box = createBox<Theme>()
 const Text = createText<Theme>()
@@ -54,7 +56,7 @@ function DirectorDetail({
       {!!director && (
         <Box paddingBottom='huge'>
           <Image
-            source={{uri: director.film.image}}
+            source={DirectorImages[Number(director._id)]}
             style={{ height: 240 }}
             resizeMode='cover'
           />

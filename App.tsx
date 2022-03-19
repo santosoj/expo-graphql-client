@@ -1,25 +1,13 @@
-import {
-  Dimensions,
-  Image,
-  StyleSheet,
-  useWindowDimensions,
-  View,
-} from 'react-native'
+import React, { useState } from 'react'
+import { useWindowDimensions } from 'react-native'
+
 import * as Font from 'expo-font'
 import AppLoading from 'expo-app-loading'
 
 import { createClient, Provider as GraphQLProvider, useQuery } from 'urql'
 
-import React, { Dispatch, SetStateAction, useCallback, useState } from 'react'
-
-import { HeaderTitleProps } from '@react-navigation/elements'
-
-import {
-  Link,
-  NavigationContainer,
-  StackRouter,
-} from '@react-navigation/native'
-import { createStackNavigator, StackHeaderProps, StackNavigationOptions } from '@react-navigation/stack'
+import { NavigationContainer } from '@react-navigation/native'
+import { createStackNavigator, StackHeaderProps } from '@react-navigation/stack'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { Icon, IconRegistry, TabBar, Tab, Layout } from '@ui-kitten/components'
 import { EvaIconsPack } from '@ui-kitten/eva-icons'
@@ -28,9 +16,6 @@ import {
   ThemeProvider,
   createBox,
   createText,
-  createRestyleComponent,
-  createVariant,
-  VariantProps,
   useTheme,
 } from '@shopify/restyle'
 
@@ -48,7 +33,6 @@ import getDirector from './graphql/getDirector.graphql'
 import getAllFilms from './graphql/getAllFilms.graphql'
 import getFilm from './graphql/getFilm.graphql'
 
-import SortControl from './components/SortControl'
 import ResponsiveScreen from './components/ResponsiveScreen'
 import AppHeader from './components/AppHeader'
 import TabbedStackNavigationHeader from './components/TabbedStackNavigationHeader'
@@ -65,15 +49,17 @@ const client = createClient({
   url: 'http://shoopshoop.au.ngrok.io/graphql',
 })
 
-const loadFonts = () => {
-  return Font.loadAsync({
-    Barlow: require('./assets/font/Barlow-Regular.ttf'),
-    'Barlow-bold': require('./assets/font/Barlow-Bold.ttf'),
-    'Barlow Semi Condensed': require('./assets/font/BarlowSemiCondensed-Regular.ttf'),
-    'Barlow Semi Condensed-bold': require('./assets/font/BarlowSemiCondensed-Bold.ttf'),
-    'Barlow Semi Condensed-light': require('./assets/font/BarlowSemiCondensed-Light.ttf'),
-    'Barlow Semi Condensed-medium': require('./assets/font/BarlowSemiCondensed-Medium.ttf'),
-  })
+const preload = () => {
+  return Promise.all([
+    Font.loadAsync({
+      Barlow: require('./assets/font/Barlow-Regular.ttf'),
+      'Barlow-bold': require('./assets/font/Barlow-Bold.ttf'),
+      'Barlow Semi Condensed': require('./assets/font/BarlowSemiCondensed-Regular.ttf'),
+      'Barlow Semi Condensed-bold': require('./assets/font/BarlowSemiCondensed-Bold.ttf'),
+      'Barlow Semi Condensed-light': require('./assets/font/BarlowSemiCondensed-Light.ttf'),
+      'Barlow Semi Condensed-medium': require('./assets/font/BarlowSemiCondensed-Medium.ttf'),
+    }),
+  ]) as unknown as Promise<void>
 }
 
 type Film = {
@@ -160,21 +146,24 @@ function StackHeader(props: StackHeaderProps) {
         state={{ index, routeNames: ['Films', 'Directors', 'About'] }}
       />
       {stackHeaderShown && (
-        <TabbedStackNavigationHeader title={title} navigation={props.navigation} />
+        <TabbedStackNavigationHeader
+          title={title}
+          navigation={props.navigation}
+        />
       )}
     </>
   )
 }
 
 export default function App() {
-  const [fontsLoaded, setFontsLoded] = useState(false)
+  const [preloaded, setPreloaded] = useState(false)
   const _theme = useTheme<Theme>()
 
-  if (!fontsLoaded) {
+  if (!preloaded) {
     return (
       <AppLoading
-        startAsync={loadFonts}
-        onFinish={() => setFontsLoded(true)}
+        startAsync={preload}
+        onFinish={() => setPreloaded(true)}
         onError={() => {}}
       />
     )
@@ -194,19 +183,13 @@ export default function App() {
             <ResponsiveScreen>
               <AppHeader />
               <Stack.Navigator screenOptions={{ header: StackHeader }}>
-                <Stack.Screen
-                  name='Films'
-                  component={FilmList}
-                />
+                <Stack.Screen name='Films' component={FilmList} />
                 <Stack.Screen
                   name='Film'
                   component={FilmDetail}
                   options={{ title: '' }}
                 />
-                <Stack.Screen
-                  name='Directors'
-                  component={DirectorList}
-                />
+                <Stack.Screen name='Directors' component={DirectorList} />
                 <Stack.Screen
                   name='Director'
                   component={DirectorDetail}
@@ -220,5 +203,3 @@ export default function App() {
     </GraphQLProvider>
   )
 }
-
-type asgkdfg = StackNavigationOptions

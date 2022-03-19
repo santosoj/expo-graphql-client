@@ -1,4 +1,4 @@
-import React, { useCallback, useRef, useState } from 'react'
+import React, { useEffect } from 'react'
 import { FlatList, Image, ScrollView, StyleSheet } from 'react-native'
 import { Link, Route } from '@react-navigation/native'
 import { createBox, createText, useTheme } from '@shopify/restyle'
@@ -8,15 +8,16 @@ import ExternalLink from '../../components/ExternalLink'
 import { useQuery } from 'urql'
 import getFilm from '../../graphql/getFilm.graphql'
 
-import { Theme } from '../../theme/restyle-theme'
+import { StackParamList } from '../types'
 import { StackScreenProps } from '@react-navigation/stack'
+
+import { Theme } from '../../theme/restyle-theme'
 
 import ExternalLinkIcon from '../../graphics/external-link.png'
 import IMDBIcon from '../../graphics/imdb.png'
 import WikipediaIcon from '../../graphics/wikipedia.png'
-import { useEffect } from 'react'
 
-import { StackParamList } from '../types'
+import { FilmImages } from '../../assets/content-images'
 
 const Box = createBox<Theme>()
 const Text = createText<Theme>()
@@ -49,7 +50,7 @@ function FilmDetail({
       {!!film && (
         <Box paddingBottom='huge'>
           <Image
-            source={{ uri: film.image }}
+            source={FilmImages[Number(film._id)]}
             style={{ height: 240 }}
             resizeMode='cover'
           />
