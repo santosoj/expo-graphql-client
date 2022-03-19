@@ -17,7 +17,7 @@ import ExternalLinkIcon from '../../graphics/external-link.png'
 import PersonPlaceholder from '../../graphics/personPlaceholder.png'
 import WikipediaIcon from '../../graphics/wikipedia.png'
 
-import { DirectorImages } from '../../assets/content-images'
+import { DirectorImages, FilmImages } from '../../assets/content-images'
 
 const Box = createBox<Theme>()
 const Text = createText<Theme>()
@@ -56,18 +56,14 @@ function DirectorDetail({
       {!!director && (
         <Box paddingBottom='huge'>
           <Image
-            source={DirectorImages[Number(director._id)]}
+            source={FilmImages[Number(director.film._id)]}
             style={{ height: 240 }}
             resizeMode='cover'
           />
           <Box flexDirection='row' paddingTop='large' paddingBottom='medium'>
             <Box>
               <Image
-                source={
-                  !!director.thumbnail
-                    ? { uri: director.thumbnail.source }
-                    : PersonPlaceholder
-                }
+                source={DirectorImages[Number(director._id)]}
                 style={{ width: 80, height: 80, marginTop: 8, marginRight: 16 }}
               />
             </Box>
