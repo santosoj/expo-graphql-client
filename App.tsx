@@ -63,6 +63,18 @@ const preload = () => {
       'Barlow Semi Condensed-light': require('./assets/font/BarlowSemiCondensed-Light.ttf'),
       'Barlow Semi Condensed-medium': require('./assets/font/BarlowSemiCondensed-Medium.ttf'),
     }),
+    Promise.all(
+      allSortArgs(FilmListSortOptions).map((args) => client.query(getAllFilms, args).toPromise())
+    ),
+    Promise.all(
+      allSortArgs(DirectorListSortOptions).map((args) => client.query(getAllDirectors, args).toPromise())
+    ),
+    Promise.all(
+      [...new Array(61).keys()].slice(1).map((i) => client.query(getFilm, {id: String(i)}).toPromise())
+    ),
+    Promise.all(
+      [...new Array(64).keys()].slice(1).map((i) => client.query(getDirector, {id: String(i)}).toPromise())
+    ),
   ]) as unknown as Promise<void>
 }
 
@@ -163,15 +175,13 @@ export default function App() {
   const [preloaded, setPreloaded] = useState(false)
   const _theme = useTheme<Theme>()
 
-  useEffect(() => {
-    console.log(JSON.stringify(allSortArgs(DirectorListSortOptions)))
-  }, [])
+  useEffect(() => {console.log('heher')}, [])
 
   if (!preloaded) {
     return (
       <AppLoading
         startAsync={preload}
-        onFinish={() => setPreloaded(true)}
+        onFinish={() => {console.log('preload finished'); setPreloaded(true)}}
         onError={() => {}}
       />
     )
