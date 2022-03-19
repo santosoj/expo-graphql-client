@@ -93,7 +93,7 @@ function DirectorList({ navigation }: StackScreenProps<StackParamList, 'Director
             data={data.directors}
             renderItem={renderItem}
             keyExtractor={(_, index) => String(index)}
-            style={[{ minHeight: 'min-content', paddingBottom: 150 }]}
+            contentContainerStyle={{paddingBottom: 150}}
           />
         )}
       </Box>

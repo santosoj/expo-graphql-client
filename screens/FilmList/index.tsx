@@ -64,7 +64,7 @@ function FilmList({ navigation }: StackScreenProps<StackParamList, 'Films'>) {
             data={data.films}
             renderItem={renderItem}
             keyExtractor={(_, index) => String(index)}
-            style={[{ paddingBottom: 150 }]}
+            contentContainerStyle={{paddingBottom: 150}}
           />
         )}
       </Box>
