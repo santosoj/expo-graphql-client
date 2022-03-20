@@ -1,3 +1,4 @@
+import { GRAPHQL_URL } from '@env'
 import * as eva from '@eva-design/eva'
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { NavigationContainer } from '@react-navigation/native'
@@ -41,7 +42,7 @@ const Box = createBox<Theme>()
 const Text = createText<Theme>()
 
 const client = createClient({
-  url: 'http://shoopshoop.au.ngrok.io/graphql',
+  url: GRAPHQL_URL,
 })
 
 const preload = () => {
