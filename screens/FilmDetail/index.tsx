@@ -25,7 +25,7 @@ function FilmDetail({
   const [{ fetching, data, error }] = useQuery<FilmResponse>({
     query: getFilm,
     variables: {
-      id: String(id),
+      id,
     },
   })
 

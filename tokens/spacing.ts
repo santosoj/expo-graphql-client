@@ -6,7 +6,10 @@ const spacing = {
  "medium": "32px",
  "big": "48px",
  "large": "64px",
- "huge": "96px"
+ "huge": "96px",
+ "cardContent": "80px",
+ "shadow": "5px",
+ "desktopSortControl": "320px"
 } as const;
 
 export default spacing;

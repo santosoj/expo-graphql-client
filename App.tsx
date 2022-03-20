@@ -56,16 +56,16 @@ const preload = () => {
         client.query(getAllDirectors, args).toPromise()
       )
     ),
-    Promise.all(
-      [...new Array(61).keys()]
-        .slice(1)
-        .map((i) => client.query(getFilm, { id: String(i) }).toPromise())
-    ),
-    Promise.all(
-      [...new Array(64).keys()]
-        .slice(1)
-        .map((i) => client.query(getDirector, { id: String(i) }).toPromise())
-    ),
+    // Promise.all(
+    //   [...new Array(61).keys()]
+    //     .slice(1)
+    //     .map((i) => client.query(getFilm, { id: String(i) }).toPromise())
+    // ),
+    // Promise.all(
+    //   [...new Array(64).keys()]
+    //     .slice(1)
+    //     .map((i) => client.query(getDirector, { id: String(i) }).toPromise())
+    // ),
   ]) as unknown as Promise<void>
 }
 

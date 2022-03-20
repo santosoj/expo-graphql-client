@@ -1,29 +1,27 @@
 import { Link } from '@react-navigation/native'
-import { createText } from '@shopify/restyle'
+import { useTheme } from '@shopify/restyle'
 import { Card as UIKittenCard } from '@ui-kitten/components'
 import React from 'react'
-import { Image, View } from 'react-native'
+import { Image } from 'react-native'
 import ExternalLinkIcon from '../../graphics/external-link.png'
-import { Theme } from '../../theme/restyle-theme'
+import { LinkToType } from '../../screens/types'
+import { Box, Text, Theme } from '../../theme/restyle-theme'
 import Shadow from './shadow.png'
 
-const Text = createText<Theme>()
-
-const HEIGHT = 80
-const SHADOW_HEIGHT = 5
-
-interface CardProps {
+interface KnownForProps {
   title: string
-  linkTo: any
+  linkTo: LinkToType
 }
 
-function KnownFor({ title, linkTo }: CardProps) {
+function KnownFor({ title, linkTo }: KnownForProps) {
+  const { radii, spacing } = useTheme<Theme>()
+
   return (
-    <View style={{ flexDirection: 'column' }}>
+    <Box flexDirection='column'>
       {/* @ts-ignore */}
-      <UIKittenCard style={{ borderRadius: 8, cursor: 'default' }}>
-        <View>
-          <Text variant='body' numberOfLines={1} style={{ fontWeight: '600' }}>
+      <UIKittenCard style={{ borderRadius: radii.soft, cursor: 'default' }}>
+        <Box>
+          <Text variant='body' numberOfLines={1} fontWeight='600'>
             Known for
           </Text>
           <Text variant='body' numberOfLines={1}>
@@ -37,20 +35,20 @@ function KnownFor({ title, linkTo }: CardProps) {
               </Text>
             </Link>
           </Text>
-        </View>
+        </Box>
       </UIKittenCard>
 
-      <View
+      <Box
+        height={spacing.shadow}
+        paddingLeft='tiny'
         style={{
-          height: SHADOW_HEIGHT,
-          paddingLeft: 8,
-          borderBottomLeftRadius: 4,
-          borderBottomRightRadius: 4,
+          borderBottomLeftRadius: radii.rounded,
+          borderBottomRightRadius: radii.rounded,
         }}
       >
         <Image source={Shadow} resizeMode='stretch' style={{ flex: 1 }} />
-      </View>
-    </View>
+      </Box>
+    </Box>
   )
 }
 

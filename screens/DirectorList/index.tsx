@@ -1,4 +1,5 @@
 import { StackScreenProps } from '@react-navigation/stack'
+import { useTheme } from '@shopify/restyle'
 import { useCallback, useState } from 'react'
 import { FlatList } from 'react-native'
 import { useQuery } from 'urql'
@@ -15,7 +16,7 @@ import {
   DirectorListResponse,
   MAXINT32,
 } from '../../graphql/types'
-import { Box } from '../../theme/restyle-theme'
+import { Box, Theme } from '../../theme/restyle-theme'
 import { StackParamList } from '../types'
 
 export const DirectorListSortOptions: SortOption[] = [
@@ -39,6 +40,7 @@ export const DirectorListSortOptions: SortOption[] = [
 function DirectorList({
   navigation,
 }: StackScreenProps<StackParamList, 'Directors'>) {
+  const { spacing } = useTheme<Theme>()
   const [selectedIndex, setSelectedIndex] = useState(2)
   const [toggleStatus, setToggleStatus] = useState(false)
 
@@ -52,7 +54,7 @@ function DirectorList({
 
   const renderItem = useCallback(({ item }: { item: DirectorListItem }) => {
     const handleCardPress = () => {
-      navigation.navigate('Director', { id: Number(item._id) })
+      navigation.navigate('Director', { id: item._id })
     }
 
     return (
@@ -71,7 +73,7 @@ function DirectorList({
   }, [])
 
   return (
-    <Box flex={1} backgroundColor='white' style={{ paddingTop: 32 }}>
+    <Box flex={1} backgroundColor='white' paddingTop='medium'>
       <SortControl
         options={DirectorListSortOptions}
         selectedIndex={selectedIndex}
@@ -79,13 +81,13 @@ function DirectorList({
         onSelectedIndexChanged={setSelectedIndex}
         onToggleStatusChanged={setToggleStatus}
       />
-      <Box style={{ paddingTop: 32, flex: 1 }}>
+      <Box flex={1} paddingTop='medium'>
         {!!data?.directors && (
           <FlatList
             data={data.directors}
             renderItem={renderItem}
             keyExtractor={(_, index) => String(index)}
-            contentContainerStyle={{ paddingBottom: 150 }}
+            contentContainerStyle={{ paddingBottom: 3 * spacing.big }}
           />
         )}
       </Box>

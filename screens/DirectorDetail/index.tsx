@@ -10,23 +10,19 @@ import WikipediaIcon from '../../graphics/wikipedia.png'
 import getDirector from '../../graphql/getDirector.graphql'
 import { DirectorResponse, MAXINT32 } from '../../graphql/types'
 import { Box, Text, Theme } from '../../theme/restyle-theme'
-
-type DirectorStackParamList = {
-  Directors: undefined
-  Director: { id: number }
-}
+import { StackParamList } from '../types'
 
 function DirectorDetail({
   route,
   navigation,
-}: StackScreenProps<DirectorStackParamList, 'Director'>) {
+}: StackScreenProps<StackParamList, 'Director'>) {
   const { id } = route.params
   const { colors } = useTheme<Theme>()
 
   const [{ fetching, data, error }] = useQuery<DirectorResponse>({
     query: getDirector,
     variables: {
-      id: String(id),
+      id,
     },
   })
 

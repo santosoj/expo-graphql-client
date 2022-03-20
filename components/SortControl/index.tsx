@@ -2,7 +2,7 @@ import { useTheme } from '@shopify/restyle'
 import { IndexPath, Select, SelectItem, Toggle } from '@ui-kitten/components'
 import { Image, useWindowDimensions, View } from 'react-native'
 import arrowUpDown from '../../graphics/arrowupdown.png'
-import { Theme } from '../../theme/restyle-theme'
+import { Box, Theme } from '../../theme/restyle-theme'
 import { SortOption } from './sorting'
 
 interface SortControlProps {
@@ -25,13 +25,7 @@ function SortControl({
   const isDesktop = width >= breakpoints.desktopMin
 
   return (
-    <View
-      style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'flex-start',
-      }}
-    >
+    <Box flexDirection='row' alignItems='center' justifyContent='flex-start'>
       <Select
         selectedIndex={new IndexPath(selectedIndex)}
         value={options[selectedIndex].displayName}
@@ -41,7 +35,7 @@ function SortControl({
         style={{
           marginRight: spacing.small,
           flex: isDesktop ? undefined : 1,
-          width: isDesktop ? 320 : undefined,
+          width: isDesktop ? spacing.desktopSortControl : undefined,
         }}
       >
         {options.map((value, index) => (
@@ -54,7 +48,7 @@ function SortControl({
 
         <Toggle checked={toggleStatus} onChange={onToggleStatusChanged} />
       </View>
-    </View>
+    </Box>
   )
 }
 

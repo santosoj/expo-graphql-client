@@ -15,9 +15,9 @@ function TabbedStackNavigationHeader({
   title,
   navigation,
 }: TabbedStackNavigationHeaderProps) {
-  const { breakpoints } = useTheme<Theme>()
+  const { breakpoints, spacing } = useTheme<Theme>()
   const { width } = useWindowDimensions()
-  const horizontalPadding = width >= breakpoints.desktopMin ? 0 : 10
+  const horizontalPadding = width >= breakpoints.desktopMin ? 0 : spacing.tiny
 
   const handleLinkPress = useCallback((ev) => {
     if (navigation.canGoBack()) {
@@ -43,12 +43,7 @@ function TabbedStackNavigationHeader({
           resizeMode='contain'
         />
       </TouchableOpacity>
-      <Text
-        variant='body'
-        numberOfLines={1}
-        color='secondarySalmon'
-        style={{ fontSize: 18, fontWeight: '600', paddingBottom: 3 }}
-      >
+      <Text variant='cardHeader' numberOfLines={1} color='secondarySalmon'>
         {title}
       </Text>
     </Box>

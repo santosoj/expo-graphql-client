@@ -1,6 +1,11 @@
 export type StackParamList = {
   Films: undefined
-  Film: { id: number }
+  Film: { id: string }
   Directors: undefined
-  Director: { id: number }
+  Director: { id: string }
+}
+
+export type LinkToType = {
+  screen: string
+  params: { [key: string]: string | number }
 }

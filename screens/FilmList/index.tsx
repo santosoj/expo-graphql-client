@@ -1,4 +1,5 @@
 import { StackScreenProps } from '@react-navigation/stack'
+import { useTheme } from '@shopify/restyle'
 import { useCallback, useState } from 'react'
 import { FlatList } from 'react-native'
 import { useQuery } from 'urql'
@@ -11,7 +12,7 @@ import {
 } from '../../components/SortControl/sorting'
 import allFilms from '../../graphql/getAllFilms.graphql'
 import { FilmListItem, FilmListResponse } from '../../graphql/types'
-import { Box } from '../../theme/restyle-theme'
+import { Box, Theme } from '../../theme/restyle-theme'
 import { StackParamList } from '../types'
 
 export const FilmListSortOptions: SortOption[] = [
@@ -26,6 +27,7 @@ export const FilmListSortOptions: SortOption[] = [
 ]
 
 function FilmList({ navigation }: StackScreenProps<StackParamList, 'Films'>) {
+  const { spacing } = useTheme<Theme>()
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [toggleStatus, setToggleStatus] = useState(false)
 
@@ -39,7 +41,7 @@ function FilmList({ navigation }: StackScreenProps<StackParamList, 'Films'>) {
 
   const renderItem = useCallback(({ item }: { item: FilmListItem }) => {
     const handleCardPress = () => {
-      navigation.navigate('Film', { id: Number(item._id) })
+      navigation.navigate('Film', { id: item._id })
     }
 
     return (
@@ -54,7 +56,7 @@ function FilmList({ navigation }: StackScreenProps<StackParamList, 'Films'>) {
   }, [])
 
   return (
-    <Box flex={1} backgroundColor='white' style={{ paddingTop: 32 }}>
+    <Box flex={1} backgroundColor='white' paddingTop='medium'>
       <SortControl
         options={FilmListSortOptions}
         selectedIndex={selectedIndex}
@@ -62,13 +64,13 @@ function FilmList({ navigation }: StackScreenProps<StackParamList, 'Films'>) {
         onSelectedIndexChanged={setSelectedIndex}
         onToggleStatusChanged={setToggleStatus}
       />
-      <Box flex={1} style={{ paddingTop: 32 }}>
+      <Box flex={1} paddingTop='medium'>
         {!!data?.films && (
           <FlatList
             data={data.films}
             renderItem={renderItem}
             keyExtractor={(_, index) => String(index)}
-            contentContainerStyle={{ paddingBottom: 150 }}
+            contentContainerStyle={{ paddingBottom: 3 * spacing.big }}
           />
         )}
       </Box>

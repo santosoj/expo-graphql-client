@@ -18,7 +18,16 @@ type Breakpoints =
 
 type Radii = 'hard' | 'rounded' | 'soft' | 'circle'
 
-type Spacing = 'tiny' | 'small' | 'medium' | 'big' | 'large' | 'huge'
+type Spacing =
+  | 'tiny'
+  | 'small'
+  | 'medium'
+  | 'big'
+  | 'large'
+  | 'huge'
+  | 'cardContent'
+  | 'shadow'
+  | 'desktopSortControl'
 
 type FontSize = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'paragraph' | 'sub'
 
@@ -58,6 +67,13 @@ const theme = createTheme({
       fontWeight: '600',
       fontSize: 28,
       lineHeight: 36,
+      color: 'black',
+    },
+    cardHeader: {
+      fontFamily: 'Barlow Semi Condensed',
+      fontWeight: '600',
+      fontSize: 18,
+      lineHeight: 28,
       color: 'black',
     },
     body: {

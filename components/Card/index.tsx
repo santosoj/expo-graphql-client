@@ -1,3 +1,4 @@
+import { useTheme } from '@shopify/restyle'
 import { Card as UIKittenCard } from '@ui-kitten/components'
 import React from 'react'
 import {
@@ -6,7 +7,7 @@ import {
   ImageBackground,
   ImageSourcePropType,
 } from 'react-native'
-import { Box, Text } from '../../theme/restyle-theme'
+import { Box, Text, Theme } from '../../theme/restyle-theme'
 import Shadow from './shadow.png'
 
 const HEIGHT = 80
@@ -21,17 +22,18 @@ interface CardProps {
 }
 
 function Card({ line1, line2, line3, imageSource, onPress }: CardProps) {
+  const { spacing } = useTheme<Theme>()
+
   return (
     <Box flexDirection='column' paddingBottom='tiny'>
       <UIKittenCard onPress={onPress}>
         <Box flexDirection='row' justifyContent='space-between'>
           <Box flexGrow={1}>
-            <Box style={{ height: HEIGHT, justifyContent: 'space-between' }}>
-              <Text
-                variant='body'
-                numberOfLines={1}
-                style={{ fontSize: 18, fontWeight: '600' }}
-              >
+            <Box
+              justifyContent='space-between'
+              style={{ height: spacing.cardContent }}
+            >
+              <Text variant='cardHeader' numberOfLines={1}>
                 {line1}
               </Text>
               <Text variant='body' numberOfLines={1}>
@@ -46,13 +48,16 @@ function Card({ line1, line2, line3, imageSource, onPress }: CardProps) {
             <Image
               source={imageSource}
               resizeMode='cover'
-              style={{ width: HEIGHT, height: HEIGHT }}
+              style={{
+                width: spacing.cardContent,
+                height: spacing.cardContent,
+              }}
             />
           </Box>
         </Box>
       </UIKittenCard>
       <Box>
-        <ImageBackground source={Shadow} style={{ height: SHADOW_HEIGHT }} />
+        <ImageBackground source={Shadow} style={{ height: spacing.shadow }} />
       </Box>
     </Box>
   )
