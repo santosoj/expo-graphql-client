@@ -2,12 +2,7 @@ import { GRAPHQL_URL } from '@env'
 import * as eva from '@eva-design/eva'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator, StackHeaderProps } from '@react-navigation/stack'
-import {
-  createBox,
-  createText,
-  ThemeProvider,
-  useTheme,
-} from '@shopify/restyle'
+import { ThemeProvider, useTheme } from '@shopify/restyle'
 import {
   ApplicationProvider,
   Icon,
@@ -36,9 +31,6 @@ import FilmList, { FilmListSortOptions } from './screens/FilmList'
 import theme, { Theme } from './theme/restyle-theme'
 import { default as kittenMapping } from './theme/ui-kitten-mapping.json'
 import { default as kittenTheme } from './theme/ui-kitten-theme.json'
-
-const Box = createBox<Theme>()
-const Text = createText<Theme>()
 
 const client = createClient({
   url: GRAPHQL_URL,

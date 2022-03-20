@@ -1,5 +1,5 @@
 import { StackScreenProps } from '@react-navigation/stack'
-import { createBox, createText, useTheme } from '@shopify/restyle'
+import { useTheme } from '@shopify/restyle'
 import React, { useEffect } from 'react'
 import { Image, ScrollView } from 'react-native'
 import { useQuery } from 'urql'
@@ -9,10 +9,7 @@ import KnownFor from '../../components/KnownFor'
 import WikipediaIcon from '../../graphics/wikipedia.png'
 import getDirector from '../../graphql/getDirector.graphql'
 import { DirectorResponse, MAXINT32 } from '../../graphql/types'
-import { Theme } from '../../theme/restyle-theme'
-
-const Box = createBox<Theme>()
-const Text = createText<Theme>()
+import { Box, Text, Theme } from '../../theme/restyle-theme'
 
 type DirectorStackParamList = {
   Directors: undefined

@@ -1,5 +1,4 @@
 import { StackScreenProps } from '@react-navigation/stack'
-import { createBox } from '@shopify/restyle'
 import { useCallback, useState } from 'react'
 import { FlatList } from 'react-native'
 import { useQuery } from 'urql'
@@ -16,10 +15,8 @@ import {
   DirectorListResponse,
   MAXINT32,
 } from '../../graphql/types'
-import { Theme } from '../../theme/restyle-theme'
+import { Box } from '../../theme/restyle-theme'
 import { StackParamList } from '../types'
-
-const Box = createBox<Theme>()
 
 export const DirectorListSortOptions: SortOption[] = [
   {

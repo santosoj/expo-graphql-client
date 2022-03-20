@@ -1,6 +1,6 @@
 import { Link } from '@react-navigation/native'
 import { StackScreenProps } from '@react-navigation/stack'
-import { createBox, createText, useTheme } from '@shopify/restyle'
+import { useTheme } from '@shopify/restyle'
 import React, { useEffect } from 'react'
 import { Image, ScrollView } from 'react-native'
 import { useQuery } from 'urql'
@@ -11,11 +11,8 @@ import IMDBIcon from '../../graphics/imdb.png'
 import WikipediaIcon from '../../graphics/wikipedia.png'
 import getFilm from '../../graphql/getFilm.graphql'
 import { FilmResponse } from '../../graphql/types'
-import { Theme } from '../../theme/restyle-theme'
+import { Box, Text, Theme } from '../../theme/restyle-theme'
 import { StackParamList } from '../types'
-
-const Box = createBox<Theme>()
-const Text = createText<Theme>()
 
 function FilmDetail({
   route,

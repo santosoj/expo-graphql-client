@@ -1,4 +1,4 @@
-import { createTheme } from '@shopify/restyle'
+import { createBox, createText, createTheme } from '@shopify/restyle'
 import colors from '../tokens/colors'
 import fontFamilies from '../tokens/fontFamilies'
 import fontSizes from '../tokens/fontSizes'
@@ -70,4 +70,9 @@ const theme = createTheme({
 })
 
 export type Theme = typeof theme
+
+export const Box = createBox<Theme>()
+
+export const Text = createText<Theme>()
+
 export default theme

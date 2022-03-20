@@ -1,13 +1,10 @@
 import { ParamListBase } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
-import { createBox, createText, useTheme } from '@shopify/restyle'
+import { useTheme } from '@shopify/restyle'
 import { useCallback } from 'react'
 import { Image, TouchableOpacity, useWindowDimensions } from 'react-native'
 import ChevronLeft from '../../graphics/chevron-left.png'
-import { Theme } from '../../theme/restyle-theme'
-
-const Box = createBox<Theme>()
-const Text = createText<Theme>()
+import { Box, Text, Theme } from '../../theme/restyle-theme'
 
 interface TabbedStackNavigationHeaderProps {
   title?: string

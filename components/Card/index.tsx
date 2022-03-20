@@ -1,4 +1,3 @@
-import { createBox, createText } from '@shopify/restyle'
 import { Card as UIKittenCard } from '@ui-kitten/components'
 import React from 'react'
 import {
@@ -7,11 +6,8 @@ import {
   ImageBackground,
   ImageSourcePropType,
 } from 'react-native'
-import { Theme } from '../../theme/restyle-theme'
+import { Box, Text } from '../../theme/restyle-theme'
 import Shadow from './shadow.png'
-
-const Box = createBox<Theme>()
-const Text = createText<Theme>()
 
 const HEIGHT = 80
 const SHADOW_HEIGHT = 5

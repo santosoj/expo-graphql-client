@@ -1,14 +1,13 @@
-import { createBox, useTheme } from '@shopify/restyle'
+import { useTheme } from '@shopify/restyle'
 import React from 'react'
 import { useWindowDimensions } from 'react-native'
-import { Theme } from '../../theme/restyle-theme'
+import { Box, Theme } from '../../theme/restyle-theme'
 
 function ResponsiveScreen({
   children,
 }: {
   children: React.ReactNode
 }): JSX.Element | null {
-  const Box = createBox<Theme>()
   const { breakpoints } = useTheme<Theme>()
   const { width, height } = useWindowDimensions()
 

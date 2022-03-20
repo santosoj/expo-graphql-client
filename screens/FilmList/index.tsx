@@ -1,5 +1,4 @@
 import { StackScreenProps } from '@react-navigation/stack'
-import { createBox } from '@shopify/restyle'
 import { useCallback, useState } from 'react'
 import { FlatList } from 'react-native'
 import { useQuery } from 'urql'
@@ -12,10 +11,8 @@ import {
 } from '../../components/SortControl/sorting'
 import allFilms from '../../graphql/getAllFilms.graphql'
 import { FilmListItem, FilmListResponse } from '../../graphql/types'
-import { Theme } from '../../theme/restyle-theme'
+import { Box } from '../../theme/restyle-theme'
 import { StackParamList } from '../types'
-
-const Box = createBox<Theme>()
 
 export const FilmListSortOptions: SortOption[] = [
   {
