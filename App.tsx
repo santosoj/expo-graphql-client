@@ -175,15 +175,15 @@ export default function App() {
   const [preloaded, setPreloaded] = useState(false)
   const _theme = useTheme<Theme>()
 
-  useEffect(() => {console.log('heher')}, [])
-
   if (!preloaded) {
     return (
       <AppLoading
         startAsync={preload}
-        onFinish={() => {console.log('preload finished'); setPreloaded(true)}}
+        onFinish={() => {setPreloaded(true)}}
         onError={() => {}}
-      />
+      >
+        <Text>piselipis</Text>
+      </AppLoading>
     )
   }
 
