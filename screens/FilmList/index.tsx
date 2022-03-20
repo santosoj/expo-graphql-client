@@ -11,6 +11,7 @@ import {
   toggleSortDirections,
 } from '../../components/SortControl/sorting'
 import allFilms from '../../graphql/getAllFilms.graphql'
+import { FilmListItem, FilmListResponse } from '../../graphql/types'
 import { Theme } from '../../theme/restyle-theme'
 import { StackParamList } from '../types'
 
@@ -31,7 +32,7 @@ function FilmList({ navigation }: StackScreenProps<StackParamList, 'Films'>) {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [toggleStatus, setToggleStatus] = useState(false)
 
-  const [{ fetching, data, error }] = useQuery({
+  const [{ fetching, data, error }] = useQuery<FilmListResponse>({
     query: allFilms,
     variables: toggleSortDirections(
       FilmListSortOptions[selectedIndex],
@@ -39,7 +40,7 @@ function FilmList({ navigation }: StackScreenProps<StackParamList, 'Films'>) {
     ).args,
   })
 
-  const renderItem = useCallback(({ item }: { item: any }) => {
+  const renderItem = useCallback(({ item }: { item: FilmListItem }) => {
     const handleCardPress = () => {
       navigation.navigate('Film', { id: Number(item._id) })
     }
@@ -47,7 +48,7 @@ function FilmList({ navigation }: StackScreenProps<StackParamList, 'Films'>) {
     return (
       <Card
         line1={item.title}
-        line2={item.year}
+        line2={String(item.year)}
         line3={item.directorsText}
         imageSource={FilmImages[Number(item._id)]}
         onPress={handleCardPress}

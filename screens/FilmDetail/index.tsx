@@ -10,6 +10,7 @@ import ExternalLinkIcon from '../../graphics/external-link.png'
 import IMDBIcon from '../../graphics/imdb.png'
 import WikipediaIcon from '../../graphics/wikipedia.png'
 import getFilm from '../../graphql/getFilm.graphql'
+import { FilmResponse } from '../../graphql/types'
 import { Theme } from '../../theme/restyle-theme'
 import { StackParamList } from '../types'
 
@@ -24,7 +25,7 @@ function FilmDetail({
 
   const { colors } = useTheme<Theme>()
 
-  const [{ fetching, data, error }] = useQuery({
+  const [{ fetching, data, error }] = useQuery<FilmResponse>({
     query: getFilm,
     variables: {
       id: String(id),

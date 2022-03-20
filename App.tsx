@@ -1,6 +1,5 @@
 import { GRAPHQL_URL } from '@env'
 import * as eva from '@eva-design/eva'
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator, StackHeaderProps } from '@react-navigation/stack'
 import {
@@ -78,36 +77,7 @@ const preload = () => {
   ]) as unknown as Promise<void>
 }
 
-type Film = {
-  _id: number
-  title: string
-  directors: number[] | object[]
-  year: number
-  imdbID: string
-  originalTitle: string
-  image: string
-  plot: string
-  directorsText: string
-  writers: string
-  stars: string
-  wikipedia: {
-    plotShort: object
-    plotFull: object
-  }
-}
-
-function AboutScreen() {
-  return <Text>AboutScreen</Text>
-}
-
-const stackScreenOptions = ({ colors }: Theme) => ({
-  headerStyle: { backgroundColor: colors.white },
-  headerTintColor: colors.black,
-  headerTitleStyle: { fontFamily: 'Barlow' },
-})
-
 const Stack = createStackNavigator()
-const { Navigator, Screen: TabScreen } = createMaterialTopTabNavigator()
 
 const FilmIcon = (props: any) => <Icon {...props} name='film-outline' />
 const DirectorIcon = (props: any) => <Icon {...props} name='person-outline' />
@@ -183,9 +153,7 @@ export default function App() {
           setPreloaded(true)
         }}
         onError={() => {}}
-      >
-        <Text>piselipis</Text>
-      </AppLoading>
+      />
     )
   }
 

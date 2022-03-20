@@ -8,12 +8,11 @@ import ExternalLink from '../../components/ExternalLink'
 import KnownFor from '../../components/KnownFor'
 import WikipediaIcon from '../../graphics/wikipedia.png'
 import getDirector from '../../graphql/getDirector.graphql'
+import { DirectorResponse, MAXINT32 } from '../../graphql/types'
 import { Theme } from '../../theme/restyle-theme'
 
 const Box = createBox<Theme>()
 const Text = createText<Theme>()
-
-const MAXINT32 = 0x7fffffff
 
 type DirectorStackParamList = {
   Directors: undefined
@@ -27,7 +26,7 @@ function DirectorDetail({
   const { id } = route.params
   const { colors } = useTheme<Theme>()
 
-  const [{ fetching, data, error }] = useQuery({
+  const [{ fetching, data, error }] = useQuery<DirectorResponse>({
     query: getDirector,
     variables: {
       id: String(id),
@@ -82,7 +81,7 @@ function DirectorDetail({
               {director.extract}
             </Text>
             <Box flexDirection='row' paddingTop='medium' alignItems='center'>
-              {!!director.contentURLs && (
+              {!!director.contentURLs.desktop?.page && (
                 <ExternalLink href={director.contentURLs.desktop.page}>
                   <Image
                     source={WikipediaIcon}

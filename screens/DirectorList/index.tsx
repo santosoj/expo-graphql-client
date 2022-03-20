@@ -11,10 +11,13 @@ import {
   toggleSortDirections,
 } from '../../components/SortControl/sorting'
 import allDirectors from '../../graphql/getAllDirectors.graphql'
+import {
+  DirectorListItem,
+  DirectorListResponse,
+  MAXINT32,
+} from '../../graphql/types'
 import { Theme } from '../../theme/restyle-theme'
 import { StackParamList } from '../types'
-
-const MAXINT32 = 0x7fffffff
 
 const Box = createBox<Theme>()
 
@@ -42,7 +45,7 @@ function DirectorList({
   const [selectedIndex, setSelectedIndex] = useState(2)
   const [toggleStatus, setToggleStatus] = useState(false)
 
-  const [{ fetching, data, error }] = useQuery({
+  const [{ fetching, data, error }] = useQuery<DirectorListResponse>({
     query: allDirectors,
     variables: toggleSortDirections(
       DirectorListSortOptions[selectedIndex],
@@ -50,7 +53,7 @@ function DirectorList({
     ).args,
   })
 
-  const renderItem = useCallback(({ item }: { item: any }) => {
+  const renderItem = useCallback(({ item }: { item: DirectorListItem }) => {
     const handleCardPress = () => {
       navigation.navigate('Director', { id: Number(item._id) })
     }
