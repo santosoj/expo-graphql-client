@@ -1,15 +1,12 @@
-import { addDecorator } from '@storybook/react'
-import { urqlDecorator } from '@urql/storybook-addon'
-
-import { urqlMock } from '../graphql/util'
-
-import { ApplicationProvider, Layout, Text } from '@ui-kitten/components'
 import * as eva from '@eva-design/eva'
-
 import { ThemeProvider } from '@shopify/restyle'
+import { addDecorator } from '@storybook/react'
+import { ApplicationProvider } from '@ui-kitten/components'
+import { urqlDecorator } from '@urql/storybook-addon'
+import { urqlMock } from '../graphql/util'
 import theme from '../theme/restyle-theme'
-import { default as kittenTheme } from '../theme/ui-kitten-theme.json'
 import { default as kittenMapping } from '../theme/ui-kitten-mapping.json'
+import { default as kittenTheme } from '../theme/ui-kitten-theme.json'
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },

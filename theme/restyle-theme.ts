@@ -1,5 +1,4 @@
 import { createTheme } from '@shopify/restyle'
-
 import colors from '../tokens/colors'
 import fontFamilies from '../tokens/fontFamilies'
 import fontSizes from '../tokens/fontSizes'

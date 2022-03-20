@@ -1,6 +1,5 @@
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-
 import TabbedStackNavigationHeader from '.'
 
 export default {
@@ -18,5 +17,5 @@ export const Default = Template.bind({})
 Default.args = {
   title: '10 Things I Hate About You',
   // @ts-ignore
-  navigation: {goBack: () => {}}
+  navigation: { goBack: () => {} },
 }

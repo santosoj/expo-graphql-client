@@ -1,12 +1,9 @@
-import { Image, useWindowDimensions, View } from 'react-native'
-
-import { IndexPath, Select, SelectItem, Toggle } from '@ui-kitten/components'
 import { useTheme } from '@shopify/restyle'
-import { Theme } from '../../theme/restyle-theme'
-
-import { SortOption } from './sorting'
-
+import { IndexPath, Select, SelectItem, Toggle } from '@ui-kitten/components'
+import { Image, useWindowDimensions, View } from 'react-native'
 import arrowUpDown from '../../graphics/arrowupdown.png'
+import { Theme } from '../../theme/restyle-theme'
+import { SortOption } from './sorting'
 
 interface SortControlProps {
   options: SortOption[]

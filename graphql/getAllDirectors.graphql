@@ -1,7 +1,7 @@
-query getAllDirectors ($order: [Sort!], $fields: [String!]) {
-  directors(orderBy: {order: $order, fields: $fields}) {
+query getAllDirectors($order: [Sort!], $fields: [String!]) {
+  directors(orderBy: { order: $order, fields: $fields }) {
     _id
-    name	
+    name
     lexKey
     birthYear
     deathYear

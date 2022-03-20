@@ -1,23 +1,17 @@
-import React, { useEffect } from 'react'
-import { FlatList, Image, ScrollView, StyleSheet } from 'react-native'
-import { Link, Route } from '@react-navigation/native'
-import { createBox, createText, useTheme } from '@shopify/restyle'
-
-import ExternalLink from '../../components/ExternalLink'
-
-import { useQuery } from 'urql'
-import getFilm from '../../graphql/getFilm.graphql'
-
-import { StackParamList } from '../types'
+import { Link } from '@react-navigation/native'
 import { StackScreenProps } from '@react-navigation/stack'
-
-import { Theme } from '../../theme/restyle-theme'
-
+import { createBox, createText, useTheme } from '@shopify/restyle'
+import React, { useEffect } from 'react'
+import { Image, ScrollView } from 'react-native'
+import { useQuery } from 'urql'
+import { FilmImages } from '../../assets/content-images'
+import ExternalLink from '../../components/ExternalLink'
 import ExternalLinkIcon from '../../graphics/external-link.png'
 import IMDBIcon from '../../graphics/imdb.png'
 import WikipediaIcon from '../../graphics/wikipedia.png'
-
-import { FilmImages } from '../../assets/content-images'
+import getFilm from '../../graphql/getFilm.graphql'
+import { Theme } from '../../theme/restyle-theme'
+import { StackParamList } from '../types'
 
 const Box = createBox<Theme>()
 const Text = createText<Theme>()
@@ -46,7 +40,7 @@ function FilmDetail({
   }, [film])
 
   return (
-    <ScrollView style={{backgroundColor: colors.white}}>
+    <ScrollView style={{ backgroundColor: colors.white }}>
       {!!film && (
         <Box paddingBottom='huge'>
           <Image

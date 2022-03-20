@@ -1,7 +1,7 @@
-import React from 'react'
 import { createBox, useTheme } from '@shopify/restyle'
-import theme, { Theme } from '../../theme/restyle-theme'
+import React from 'react'
 import { useWindowDimensions } from 'react-native'
+import { Theme } from '../../theme/restyle-theme'
 
 function ResponsiveScreen({
   children,
@@ -22,7 +22,7 @@ function ResponsiveScreen({
             ? Math.trunc((width - breakpoints.desktopMin) / 2)
             : 0,
         minHeight: height,
-        maxHeight: height
+        maxHeight: height,
       }}
     >
       {children}

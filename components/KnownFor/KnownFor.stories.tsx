@@ -1,7 +1,5 @@
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
-import { View } from 'react-native'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-
 import KnownFor from '.'
 
 export default {

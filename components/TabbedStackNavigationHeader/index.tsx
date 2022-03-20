@@ -1,18 +1,10 @@
-import {
-  GestureResponderEvent,
-  Image,
-  TouchableOpacity,
-  useWindowDimensions,
-} from 'react-native'
-import { Link, ParamListBase } from '@react-navigation/native'
-import { To } from '@react-navigation/native/lib/typescript/src/useLinkTo'
-import { createBox, createText, useTheme } from '@shopify/restyle'
-import { Theme } from '../../theme/restyle-theme'
-
-import ChevronLeft from '../../graphics/chevron-left.png'
-import ChevronLeftHover from '../../graphics/chevron-left-hover.png'
+import { ParamListBase } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
+import { createBox, createText, useTheme } from '@shopify/restyle'
 import { useCallback } from 'react'
+import { Image, TouchableOpacity, useWindowDimensions } from 'react-native'
+import ChevronLeft from '../../graphics/chevron-left.png'
+import { Theme } from '../../theme/restyle-theme'
 
 const Box = createBox<Theme>()
 const Text = createText<Theme>()

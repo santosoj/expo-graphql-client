@@ -1,50 +1,41 @@
-import React, { useEffect, useState } from 'react'
-import { useWindowDimensions } from 'react-native'
-
-import * as Font from 'expo-font'
-import AppLoading from 'expo-app-loading'
-
-import { createClient, Provider as GraphQLProvider, useQuery } from 'urql'
-
+import * as eva from '@eva-design/eva'
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
 import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator, StackHeaderProps } from '@react-navigation/stack'
-import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs'
-import { Icon, IconRegistry, TabBar, Tab, Layout } from '@ui-kitten/components'
-import { EvaIconsPack } from '@ui-kitten/eva-icons'
-
 import {
-  ThemeProvider,
   createBox,
   createText,
+  ThemeProvider,
   useTheme,
 } from '@shopify/restyle'
-
-import { ApplicationProvider } from '@ui-kitten/components'
-import * as eva from '@eva-design/eva'
-
-import { default as kittenTheme } from './theme/ui-kitten-theme.json'
-import { default as kittenMapping } from './theme/ui-kitten-mapping.json'
-
-import theme, { Theme } from './theme/restyle-theme'
-
-import getAllDirectors from './graphql/getAllDirectors.graphql'
-import getDirector from './graphql/getDirector.graphql'
-
-import getAllFilms from './graphql/getAllFilms.graphql'
-import getFilm from './graphql/getFilm.graphql'
-
-import { allSortArgs } from './components/SortControl/sorting'
-import { DirectorListSortOptions } from './screens/DirectorList'
-import { FilmListSortOptions } from './screens/FilmList'
-
-import ResponsiveScreen from './components/ResponsiveScreen'
+import {
+  ApplicationProvider,
+  Icon,
+  IconRegistry,
+  Tab,
+  TabBar,
+} from '@ui-kitten/components'
+import { EvaIconsPack } from '@ui-kitten/eva-icons'
+import AppLoading from 'expo-app-loading'
+import * as Font from 'expo-font'
+import React, { useState } from 'react'
+import { useWindowDimensions } from 'react-native'
+import { createClient, Provider as GraphQLProvider } from 'urql'
 import AppHeader from './components/AppHeader'
+import ResponsiveScreen from './components/ResponsiveScreen'
+import { allSortArgs } from './components/SortControl/sorting'
 import TabbedStackNavigationHeader from './components/TabbedStackNavigationHeader'
-
-import FilmDetail from './screens/FilmDetail'
-import FilmList from './screens/FilmList'
-import DirectorList from './screens/DirectorList'
+import getAllDirectors from './graphql/getAllDirectors.graphql'
+import getAllFilms from './graphql/getAllFilms.graphql'
+import getDirector from './graphql/getDirector.graphql'
+import getFilm from './graphql/getFilm.graphql'
 import DirectorDetail from './screens/DirectorDetail'
+import DirectorList, { DirectorListSortOptions } from './screens/DirectorList'
+import FilmDetail from './screens/FilmDetail'
+import FilmList, { FilmListSortOptions } from './screens/FilmList'
+import theme, { Theme } from './theme/restyle-theme'
+import { default as kittenMapping } from './theme/ui-kitten-mapping.json'
+import { default as kittenTheme } from './theme/ui-kitten-theme.json'
 
 const Box = createBox<Theme>()
 const Text = createText<Theme>()
@@ -64,16 +55,24 @@ const preload = () => {
       'Barlow Semi Condensed-medium': require('./assets/font/BarlowSemiCondensed-Medium.ttf'),
     }),
     Promise.all(
-      allSortArgs(FilmListSortOptions).map((args) => client.query(getAllFilms, args).toPromise())
+      allSortArgs(FilmListSortOptions).map((args) =>
+        client.query(getAllFilms, args).toPromise()
+      )
     ),
     Promise.all(
-      allSortArgs(DirectorListSortOptions).map((args) => client.query(getAllDirectors, args).toPromise())
+      allSortArgs(DirectorListSortOptions).map((args) =>
+        client.query(getAllDirectors, args).toPromise()
+      )
     ),
     Promise.all(
-      [...new Array(61).keys()].slice(1).map((i) => client.query(getFilm, {id: String(i)}).toPromise())
+      [...new Array(61).keys()]
+        .slice(1)
+        .map((i) => client.query(getFilm, { id: String(i) }).toPromise())
     ),
     Promise.all(
-      [...new Array(64).keys()].slice(1).map((i) => client.query(getDirector, {id: String(i)}).toPromise())
+      [...new Array(64).keys()]
+        .slice(1)
+        .map((i) => client.query(getDirector, { id: String(i) }).toPromise())
     ),
   ]) as unknown as Promise<void>
 }
@@ -179,7 +178,9 @@ export default function App() {
     return (
       <AppLoading
         startAsync={preload}
-        onFinish={() => {setPreloaded(true)}}
+        onFinish={() => {
+          setPreloaded(true)
+        }}
         onError={() => {}}
       >
         <Text>piselipis</Text>

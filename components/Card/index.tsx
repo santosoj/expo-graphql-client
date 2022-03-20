@@ -1,22 +1,14 @@
+import { createBox, createText } from '@shopify/restyle'
+import { Card as UIKittenCard } from '@ui-kitten/components'
+import React from 'react'
 import {
   GestureResponderEvent,
   Image,
   ImageBackground,
-  ImageRequireSource,
   ImageSourcePropType,
-  StyleProp,
-  TouchableOpacity,
-  View,
-  ViewStyle,
 } from 'react-native'
-import { createBox, createText } from '@shopify/restyle'
-import { Card as UIKittenCard } from '@ui-kitten/components'
-
 import { Theme } from '../../theme/restyle-theme'
-
 import Shadow from './shadow.png'
-import React, { useCallback } from 'react'
-import { Link } from '@react-navigation/native'
 
 const Box = createBox<Theme>()
 const Text = createText<Theme>()

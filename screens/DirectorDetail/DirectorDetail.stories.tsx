@@ -1,13 +1,11 @@
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-
 import DirectorDetail from '.'
 
 export default {
   title: 'Screens/DirectorDetail',
   component: DirectorDetail,
-  argTypes: {
-  },
+  argTypes: {},
   parameters: {},
 } as ComponentMeta<typeof DirectorDetail>
 
@@ -19,13 +17,13 @@ export const Default = Template.bind({})
 Default.args = {
   route: {
     params: {
-      id: 23
+      id: 23,
     },
     key: 'hehehe',
-    name: 'Director'
+    name: 'Director',
   },
   // @ts-ignore
   navigation: {
     setOptions: () => {},
-  }
+  },
 }

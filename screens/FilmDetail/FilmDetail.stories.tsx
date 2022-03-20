@@ -1,15 +1,11 @@
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-
-import { urqlMock } from '../../graphql/util'
-
 import FilmDetail from '.'
 
 export default {
   title: 'Screens/FilmDetail',
   component: FilmDetail,
-  argTypes: {
-  },
+  argTypes: {},
   parameters: {},
 } as ComponentMeta<typeof FilmDetail>
 
@@ -21,13 +17,13 @@ export const Default = Template.bind({})
 Default.args = {
   route: {
     params: {
-      id: 23
+      id: 23,
     },
     key: 'hehehe',
-    name: 'Film'
+    name: 'Film',
   },
   // @ts-ignore
   navigation: {
     setOptions: () => {},
-  }
+  },
 }

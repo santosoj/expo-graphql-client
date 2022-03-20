@@ -1,24 +1,18 @@
+import { StackScreenProps } from '@react-navigation/stack'
+import { createBox } from '@shopify/restyle'
 import { useCallback, useState } from 'react'
 import { FlatList } from 'react-native'
-import { createBox } from '@shopify/restyle'
-
-import { StackScreenProps } from '@react-navigation/stack'
-import { StackParamList } from '../types'
-
 import { useQuery } from 'urql'
-
-import allDirectors from '../../graphql/getAllDirectors.graphql'
-
+import { DirectorImages } from '../../assets/content-images'
 import Card from '../../components/Card'
 import SortControl from '../../components/SortControl'
 import {
   SortOption,
   toggleSortDirections,
 } from '../../components/SortControl/sorting'
-
+import allDirectors from '../../graphql/getAllDirectors.graphql'
 import { Theme } from '../../theme/restyle-theme'
-
-import { DirectorImages } from '../../assets/content-images'
+import { StackParamList } from '../types'
 
 const MAXINT32 = 0x7fffffff
 
@@ -37,7 +31,7 @@ export const DirectorListSortOptions: SortOption[] = [
     displayName: 'Year of death',
     args: {
       fields: ['deathYear', 'birthYear', 'lexKey'],
-      order: ['asc', 'asc', 'asc']
+      order: ['asc', 'asc', 'asc'],
     },
   },
 ]

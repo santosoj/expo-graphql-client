@@ -1,32 +1,27 @@
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
 import { View } from 'react-native'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-
 import Card from '.'
-
 import SampleImage from './sampleImage.jpg'
 
 export default {
   title: 'Card',
   component: Card,
-  argTypes: {
-  },
+  argTypes: {},
   parameters: {},
 } as ComponentMeta<typeof Card>
 
-const Template: ComponentStory<typeof Card> = (args) => (
-  <Card {...args} />
-)
+const Template: ComponentStory<typeof Card> = (args) => <Card {...args} />
 
 const MultipleTemplate: ComponentStory<typeof Card> = (args) => (
   // @ts-ignore
-  <View style={{gap: 8}}>
+  <View style={{ gap: 8 }}>
     <Card {...args} />
     <Card {...args} />
     <Card {...args} />
     <Card {...args} />
     <Card {...args} />
-  </View>  
+  </View>
 )
 
 export const Default = Template.bind({})
@@ -35,7 +30,7 @@ Default.args = {
   line2: '1999',
   line3: 'Gil Junger',
   imageSource: SampleImage,
-  onPress: () => {}
+  onPress: () => {},
 }
 
 export const Multiple = MultipleTemplate.bind({})

@@ -1,10 +1,8 @@
 import { OperationDefinitionNode } from 'graphql'
 import { Operation } from 'urql'
-
 import allDirectors from '../fixtures/getAllDirectors.json'
-import director from '../fixtures/getDirector.json'
-
 import allFilms from '../fixtures/getAllFilms.json'
+import director from '../fixtures/getDirector.json'
 import film from '../fixtures/getFilm.json'
 
 const mockDataForQuery: { [key in QueryName]: object } = {

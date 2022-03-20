@@ -1,6 +1,6 @@
 export type StackParamList = {
-  Films: undefined,
+  Films: undefined
   Film: { id: number }
-  Directors: undefined,
+  Directors: undefined
   Director: { id: number }
 }

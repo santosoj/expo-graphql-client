@@ -1,23 +1,14 @@
-import React, { useEffect } from 'react'
-import { FlatList, Image, ScrollView, StyleSheet } from 'react-native'
-import { Link, Route } from '@react-navigation/native'
-import { createBox, createText, useTheme } from '@shopify/restyle'
-
 import { StackScreenProps } from '@react-navigation/stack'
-
+import { createBox, createText, useTheme } from '@shopify/restyle'
+import React, { useEffect } from 'react'
+import { Image, ScrollView } from 'react-native'
 import { useQuery } from 'urql'
-import getDirector from '../../graphql/getDirector.graphql'
-
+import { DirectorImages, FilmImages } from '../../assets/content-images'
 import ExternalLink from '../../components/ExternalLink'
 import KnownFor from '../../components/KnownFor'
-
-import { Theme } from '../../theme/restyle-theme'
-
-import ExternalLinkIcon from '../../graphics/external-link.png'
-import PersonPlaceholder from '../../graphics/personPlaceholder.png'
 import WikipediaIcon from '../../graphics/wikipedia.png'
-
-import { DirectorImages, FilmImages } from '../../assets/content-images'
+import getDirector from '../../graphql/getDirector.graphql'
+import { Theme } from '../../theme/restyle-theme'
 
 const Box = createBox<Theme>()
 const Text = createText<Theme>()
@@ -52,7 +43,7 @@ function DirectorDetail({
   }, [director])
 
   return (
-    <ScrollView style={{backgroundColor: colors.white}}>
+    <ScrollView style={{ backgroundColor: colors.white }}>
       {!!director && (
         <Box paddingBottom='huge'>
           <Image

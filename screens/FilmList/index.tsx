@@ -1,24 +1,18 @@
+import { StackScreenProps } from '@react-navigation/stack'
+import { createBox } from '@shopify/restyle'
 import { useCallback, useState } from 'react'
 import { FlatList } from 'react-native'
-import { createBox } from '@shopify/restyle'
-
-import { StackParamList } from '../types'
-import { StackScreenProps } from '@react-navigation/stack'
-
 import { useQuery } from 'urql'
-
-import allFilms from '../../graphql/getAllFilms.graphql'
-
+import { FilmImages } from '../../assets/content-images'
 import Card from '../../components/Card'
 import SortControl from '../../components/SortControl'
 import {
   SortOption,
   toggleSortDirections,
 } from '../../components/SortControl/sorting'
-
+import allFilms from '../../graphql/getAllFilms.graphql'
 import { Theme } from '../../theme/restyle-theme'
-
-import { FilmImages } from '../../assets/content-images'
+import { StackParamList } from '../types'
 
 const Box = createBox<Theme>()
 

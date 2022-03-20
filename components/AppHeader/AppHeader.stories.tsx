@@ -1,13 +1,11 @@
+import { ComponentMeta, ComponentStory } from '@storybook/react'
 import React from 'react'
-import { ComponentStory, ComponentMeta } from '@storybook/react'
-
 import AppHeader from '.'
 
 export default {
   title: 'AppHeader',
   component: AppHeader,
-  argTypes: {
-  },
+  argTypes: {},
   parameters: {},
 } as ComponentMeta<typeof AppHeader>
 
@@ -16,5 +14,4 @@ const Template: ComponentStory<typeof AppHeader> = (args) => (
 )
 
 export const Default = Template.bind({})
-Default.args = {
-}
+Default.args = {}
