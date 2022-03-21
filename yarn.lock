@@ -12470,6 +12470,11 @@ unbox-primitive@^1.0.1:
     has-symbols "^1.0.2"
     which-boxed-primitive "^1.0.2"
 
+uncanon-types@^1.0.3:
+  version "1.0.4"
+  resolved "http://localhost:4873/uncanon-types/-/uncanon-types-1.0.4.tgz#81db7b3976fd546f9e55d80ebba0231ad8828251"
+  integrity sha512-IHh0Oxd43RKda/Yb5B52zdOX9QL1l/5O74AkOQlR4h9qsLeXJSKq8efb6bp7S5lBq/a4ron/7sqAHy97bLBElQ==
+
 unfetch@^4.2.0:
   version "4.2.0"
   resolved "https://registry.npmjs.org/unfetch/-/unfetch-4.2.0.tgz#7e21b0ef7d363d8d9af0fb929a5555f6ef97a3be"
